@@ -1,0 +1,15 @@
+<% @tables.each do |table| %>
+<%= table[0].title.name %>
+<table>
+  <tr>
+    <td>Country</td>
+    <td>Data</td>
+  </tr>
+  <% table.each do |fact| %>
+  <tr>
+    <td><%= fact.location %></td>
+    <td><%= fact.data %></td>
+  </tr>
+  <% end %>
+</table>
+<% end %>

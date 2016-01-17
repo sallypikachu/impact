@@ -11,9 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160117055545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "facts", force: :cascade do |t|
+    t.integer  "title_id",   null: false
+    t.integer  "year_id",    null: false
+    t.string   "data",       null: false
+    t.string   "location",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "titles", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "titles", ["name"], name: "index_titles_on_name", unique: true, using: :btree
+
+  create_table "years", force: :cascade do |t|
+    t.integer "year", null: false
+  end
+
+  add_index "years", ["year"], name: "index_years_on_year", unique: true, using: :btree
 
 end
