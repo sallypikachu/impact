@@ -6,7 +6,13 @@ class FactsController < ApplicationController
     titles = Title.all
     years = Year.all
     titles.each do |title|
-      @tables << title.fact
+      @tables << title.facts
+    end
+    @t = []
+    titles.each do |title|
+      years.each do |year|
+        @t << Fact.where(title: title, year: year)
+      end
     end
   end
 
@@ -24,6 +30,10 @@ class FactsController < ApplicationController
     @years = []
     Year.all.each do |year|
       @years << [year.year, year.id]
+    end
+    @locations = []
+    Location.all.each do |location|
+      @locations << [location.country, location.id]
     end
   end
 
@@ -43,7 +53,7 @@ class FactsController < ApplicationController
     params.require(:fact).permit(
       :title_id,
       :year_id,
-      :location,
+      :location_id,
       :data,
     )
   end

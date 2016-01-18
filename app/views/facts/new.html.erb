@@ -23,8 +23,12 @@
     </div>
 
     <div class="field">
-      <%= f.label :location %><br />
-      <%= f.text_field :location %>
+      <%= f.label :location_id %>
+      <%= f.select(:location_id) do %>
+        <% @locations.each do |option| %>
+          <%= content_tag(:option, option.first, value: option.last) %>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="field">
