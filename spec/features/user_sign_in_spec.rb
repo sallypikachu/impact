@@ -14,6 +14,9 @@ require "rails_helper"
 # [ ] If I'm already authenticated, I don't have the option to sign in
 
 feature "sees sign in options" do
+  let!(:user) { User.create(username: "user", email: "user@email.com", password: "password") }
+  let!(:new_user) { User.new(username: "new_user", email: "new_user@email.com", password: "password") }
+
   scenario "user visits index page" do
     visit root_path
     expect(page).to have_content("Sign In")
@@ -26,20 +29,18 @@ feature "sees sign in options" do
   end
 
   scenario "user succesfully signs in" do
-    visit user_sign_in_path
     sign_in_as(user)
     expect(page).to have_content("Signed in successfully.")
   end
 
   scenario "user successfully signs out" do
-    visit user_sign_in_path
     sign_in_as(user)
     click_on "Sign Out"
     expect(page).to have_content("Signed out successfully.")
   end
 
   scenario "user can sign up" do
-    visit user_sign_in_path
+    visit root_path
     click_link "Sign In"
     click_on "Sign up"
     fill_in "Username", with: user.username
@@ -50,4 +51,12 @@ feature "sees sign in options" do
 
     expect(page).to have_content("Welcome! You have signed up successfully.")
   end
+end
+
+def sign_in_as(user)
+  visit root_path
+  click_link "Sign In"
+  fill_in 'Email', with: user.email
+  fill_in 'Password', with: user.password
+  click_button 'Log in'
 end

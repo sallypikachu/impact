@@ -1,11 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it { should have_valid(:first_name).when("Kevin", "Simon") }
-  it { should_not have_valid(:first_name).when(nil, "") }
-
-  it { should have_valid(:last_name).when("Chu", "Chew") }
-  it { should_not have_valid(:last_name).when(nil, "") }
+  it { should have_valid(:username).when("Kevin", "Simon", "over9000") }
+  it { should_not have_valid(:username).when(nil, "") }
 
   it { should have_valid(:email).when("user@example.com", "another@example.com") }
   it { should_not have_valid(:email).when(nil, "", "Simon", "user@com", "user.com") }

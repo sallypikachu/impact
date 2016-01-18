@@ -18,6 +18,12 @@
   <ul class="menu">
     <li><input type="search" placeholder="Search"></li>
     <li><button type="button" class="button">Search</button></li>
+    <% if user_signed_in? %>
+      <li><%= link_to "Profile", "/users/#{current_user.id}" %></li>
+      <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+      <li id="sign-in"><%= link_to "Sign In", new_user_session_path %></li>
+    <% end %>
   </ul>
   </ul>
   </div>
