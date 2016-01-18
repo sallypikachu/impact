@@ -9,4 +9,11 @@ class FactsController < ApplicationController
 
   def show
   end
+
+  def new
+    @fact = Fact.new
+  end
+
+  def create
+  end
 end
