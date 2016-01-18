@@ -6,4 +6,5 @@ class Fact < ActiveRecord::Base
 
   belongs_to :title
   belongs_to :year
+  belongs_to :user
 end

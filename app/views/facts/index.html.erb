@@ -6,11 +6,13 @@
   <tr>
     <td>Country</td>
     <td>Data</td>
+    <td>Year</td>
   </tr>
   <% table.each do |fact| %>
   <tr>
     <td><%= fact.location %></td>
     <td><%= fact.data %></td>
+    <td><%= fact.year.year %>
   </tr>
   <% end %>
 </table>
