@@ -15,7 +15,6 @@ require "rails_helper"
 
 feature "sees sign in options" do
   let!(:user) { User.create(username: "user", email: "user@email.com", password: "password") }
-  let!(:new_user) { User.new(username: "new_user", email: "new_user@email.com", password: "password") }
 
   scenario "user visits index page" do
     visit root_path
@@ -40,13 +39,14 @@ feature "sees sign in options" do
   end
 
   scenario "user can sign up" do
+    new_user = User.new(username: "new_user", email: "new_user@email.com", password: "password")
     visit root_path
     click_link "Sign In"
     click_on "Sign up"
-    fill_in "Username", with: user.username
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    fill_in "Password confirmation", with: user.password
+    fill_in "Username", with: new_user.username
+    fill_in "Email", with: new_user.email
+    fill_in "Password", with: new_user.password
+    fill_in "Password confirmation", with: new_user.password
     click_on "Sign up"
 
     expect(page).to have_content("Welcome! You have signed up successfully.")
