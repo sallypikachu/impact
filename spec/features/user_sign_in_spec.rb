@@ -52,11 +52,11 @@ feature "sees sign in options" do
     expect(page).to have_content("Welcome! You have signed up successfully.")
   end
 end
-
-def sign_in_as(user)
-  visit root_path
-  click_link "Sign In"
-  fill_in 'Email', with: user.email
-  fill_in 'Password', with: user.password
-  click_button 'Log in'
-end
+# 
+# def sign_in_as(user)
+#   visit root_path
+#   click_link "Sign In"
+#   fill_in 'Email', with: user.email
+#   fill_in 'Password', with: user.password
+#   click_button 'Log in'
+# end
