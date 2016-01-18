@@ -7,9 +7,12 @@ require "rails_helper"
 # [ ] There is a profile option
 # [ ] I can click an edit credentials link
 
-
 feature "sees profile in top bar" do
-  let!(:user) { User.create(username: "user", email: "user@email.com", password: "password") }
+  let!(:user) { User.create(
+    username: "user",
+    email: "user@email.com",
+    password: "password")
+  }
 
   scenario "user visits index page" do
     sign_in_as(user)
