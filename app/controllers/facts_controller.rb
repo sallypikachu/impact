@@ -54,7 +54,30 @@ class FactsController < ApplicationController
       ],
       :center=> [100, 80], :size=> 100, :showInLegend=> false)
     end
-    @h = LazyHighCharts::HighChart.new('graph') do |f|
+    @chart2 = LazyHighCharts::HighChart.new('graph') do |f|
+      f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
+      f.xAxis(:categories => ["United States", "Japan", "China", "Germany", "France"])
+      f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
+      f.series(:name => "Population in Millions", :yAxis => 1, :data => [310, 127, 1340, 81, 65])
+
+      f.yAxis [
+        {:title => {:text => "GDP in Billions", :margin => 70} },
+        {:title => {:text => "Population in Millions"}, :opposite => true},
+      ]
+
+      f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
+      f.chart({:defaultSeriesType=>"column"})
+    end
+
+      @chart4 = LazyHighCharts::HighChart.new('column') do |f|
+        f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
+        f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )
+        f.title({ :text=>"example test title from controller"})
+        f.options[:chart][:defaultSeriesType] = "column"
+        f.plot_options({:column=>{:stacking=>"percent"}})
+      end
+
+      @h = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
         f.xAxis(:categories => ["United States", "Japan", "China", "Germany", "France"])
         f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
@@ -68,47 +91,59 @@ class FactsController < ApplicationController
         f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
         f.chart({:defaultSeriesType=>"column"})
       end
-  end
 
-  def show
-  end
+      @data = {"status" => "ok", "data" => [{"2014-06-16 16:00:00" => 24.2},{"2014-06-17 12:00:00" => 30.2},{"2014-06-18 17:00:00" => 42.9}]}
+      d = []
+      @data['data'].each do |data|
+        d << [DateTime.parse(data.keys.first).to_i*1000, data.values.first]
+      end
+      @playground = LazyHighCharts::HighChart.new('graph') do |f|
+        f.title(text: "Total final consumption")
+        f.series(type: 'line', name: "USA", data: d)
+        f.xAxis(type: "datetime", dateTimeLabelFormats: {year: '%Y'})
+        f.yAxis(title: {:text => "Tetrajoule (TJ)", style: { color: '#333'}})
+      end
+    end
 
-  def new
-    @fact = Fact.new
-    @title = Title.new
-    @year = Year.new
-    @titles = []
-    Title.all.each do |title|
-      @titles << [title.name, title.id]
+    def show
     end
-    @years = []
-    Year.all.each do |year|
-      @years << [year.year, year.id]
-    end
-    @locations = []
-    Location.all.each do |location|
-      @locations << [location.country, location.id]
-    end
-  end
 
-  def create
-    @fact = Fact.new(fact_params)
-    @fact.user = current_user
-    if @fact.save
-      flash.notice = "Venue added successfully"
-      redirect_to facts_path
-    else
-      flash.notice = @fact.errors.full_messages.join(". ")
-      render "new"
+    def new
+      @fact = Fact.new
+      @title = Title.new
+      @year = Year.new
+      @titles = []
+      Title.all.each do |title|
+        @titles << [title.name, title.id]
+      end
+      @years = []
+      Year.all.each do |year|
+        @years << [year.year, year.id]
+      end
+      @locations = []
+      Location.all.each do |location|
+        @locations << [location.country, location.id]
+      end
     end
-  end
 
-  def fact_params
-    params.require(:fact).permit(
+    def create
+      @fact = Fact.new(fact_params)
+      @fact.user = current_user
+      if @fact.save
+        flash.notice = "Venue added successfully"
+        redirect_to facts_path
+      else
+        flash.notice = @fact.errors.full_messages.join(". ")
+        render "new"
+      end
+    end
+
+    def fact_params
+      params.require(:fact).permit(
       :title_id,
       :year_id,
       :location_id,
       :data,
-    )
+      )
+    end
   end
-end
