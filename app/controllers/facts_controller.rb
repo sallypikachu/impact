@@ -39,7 +39,6 @@ class FactsController < ApplicationController
     url = "http://api.worldbank.org/countries/USA/indicators/8.1.1_FINAL.ENERGY.CONSUMPTION?per_page=500&date=1960:2016&format=json"
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
-    binding.pry
   end
 
   def show
