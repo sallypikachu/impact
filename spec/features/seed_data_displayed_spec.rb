@@ -16,8 +16,8 @@ feature "visit home page to see tables/charts/maps" do
     japan = Location.create(country: "Japan")
 
     Fact.create([
-      {title: biodiversity, year: year2008, location: brazil, data: "100.0"},
-      {title: biodiversity, year: year2008, location: japan, data: "36.0"}
+      { title: biodiversity, year: year2008, location: brazil, data: "100.0" },
+      { title: biodiversity, year: year2008, location: japan, data: "36.0" }
     ])
     visit root_path
 

@@ -18,7 +18,6 @@ class FactsController < ApplicationController
       data = {}
       countries_data = []
       uniq_locations.each do |location|
-        # country_data = Fact.where(title: Title.find_by(name: title.name), location: Location.find_by(country: location)).map{|x| x.data}
         country_data = []
         uniq_years.each do |year|
           year_data = Fact.where(title: Title.find_by(name: title.name), location: Location.find_by(country: location), year: Year.find_by(year: year))
