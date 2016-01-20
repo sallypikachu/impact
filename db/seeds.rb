@@ -34,7 +34,6 @@ japan = Location.create(country: "Japan")
 russia = Location.create(country: "Russia")
 peru = Location.create(country: "Peru")
 
-
 Fact.create([
   { title: energy, year: year2013, location: iceland, data: "16679" },
   { title: energy, year: year2013, location: luxembourg, data: "7327" },
