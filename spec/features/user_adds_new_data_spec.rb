@@ -7,7 +7,6 @@ require "rails_helper"
 # [ ] There is a add data button
 # [ ] I can succesfully add new data
 
-
 feature "sees profile in top bar" do
   let!(:user) { User.create(
     username: "user",
