@@ -1,39 +1,40 @@
 <button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
 <hr>
-<% @tables.each do |table| %>
-<h2><%= table[0].title.name %></h2>
-<table>
-  <tr>
-    <td>Country</td>
-    <td>Data</td>
-    <td>Year</td>
-  </tr>
-  <% table.each do |fact| %>
-  <tr>
-    <td><%= fact.location.country %></td>
-    <td><%= fact.data %></td>
-    <td><%= fact.year.year %>
-  </tr>
-  <% end %>
-</table>
-<% end %>
-
-<% @t.each do |table| %>
+<% @tables.each_pair do |table, data| %>
   <% unless table.empty? %>
-    <h2><%= table[0].title.name %></h2>
+    <h2><%= table %></h2>
     <table>
       <tr>
-        <td>Country</td>
-        <td>Data</td>
-        <td>Year</td>
+        <% data[:columns].each do |column| %>
+        <td><%= column %></td>
+        <% end %>
       </tr>
-      <% table.each do |fact| %>
+      <% data[:country_data].each do |country| %>
       <tr>
-        <td><%= fact.location.country %></td>
-        <td><%= fact.data %></td>
-        <td><%= fact.year.year %>
+        <% country.each do |value| %>
+        <td><%= value %></td>
+        <% end %>
       </tr>
       <% end %>
     </table>
   <% end %>
 <% end %>
+
+<%= @info[1][0]["indicator"]["value"] %>
+<table>
+  <tr>
+    <td>Country</td>
+    <% @info[1].each do |info| %>
+    <% if info["value"] %>
+    <td><%= info["date"] %></td>
+    <% end %>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= @info[1][0]["country"]["value"] %></td>
+<% @info[1].each do |info| %>
+<% if info["value"] %>
+<td><%= info["value"] %></td>
+<% end %>
+<% end %>
+</tr>

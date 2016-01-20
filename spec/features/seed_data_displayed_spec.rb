@@ -14,6 +14,7 @@ feature "visit home page to see tables/charts/maps" do
     year2008 = Year.create(year: 2008)
     brazil = Location.create(country: "Brazil")
     japan = Location.create(country: "Japan")
+
     Fact.create([
       { title: biodiversity, year: year2008, location: brazil, data: "100.0" },
       { title: biodiversity, year: year2008, location: japan, data: "36.0" }
