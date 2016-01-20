@@ -39,59 +39,6 @@ class FactsController < ApplicationController
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
 
-    @chart = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title({ :text=>"Combination chart"})
-      f.options[:xAxis][:categories] = ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
-      f.labels(:items=>[:html=>"Total fruit consumption", :style=>{:left=>"40px", :top=>"8px", :color=>"black"} ])
-      f.series(:type=> 'column',:name=> 'Jane',:data=> [3, 2, 1, 3, 4])
-      f.series(:type=> 'column',:name=> 'John',:data=> [2, 3, 5, 7, 6])
-      f.series(:type=> 'column', :name=> 'Joe',:data=> [4, 3, 3, 9, 0])
-      f.series(:type=> 'spline',:name=> 'Average', :data=> [3, 2.67, 3, 6.33, 3.33])
-      f.series(:type=> 'pie',:name=> 'Total consumption', :data=> [
-        {:name=> 'Jane', :y=> 13, :color=> 'red'},
-        {:name=> 'John', :y=> 23,:color=> 'green'},
-        {:name=> 'Joe', :y=> 19,:color=> 'blue'}
-      ],
-      :center=> [100, 80], :size=> 100, :showInLegend=> false)
-    end
-    @chart2 = LazyHighCharts::HighChart.new('graph') do |f|
-      f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
-      f.xAxis(:categories => ["United States", "Japan", "China", "Germany", "France"])
-      f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
-      f.series(:name => "Population in Millions", :yAxis => 1, :data => [310, 127, 1340, 81, 65])
-
-      f.yAxis [
-        {:title => {:text => "GDP in Billions", :margin => 70} },
-        {:title => {:text => "Population in Millions"}, :opposite => true},
-      ]
-
-      f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
-      f.chart({:defaultSeriesType=>"column"})
-    end
-
-      @chart4 = LazyHighCharts::HighChart.new('column') do |f|
-        f.series(:name=>'John',:data=> [3, 20, 3, 5, 4, 10, 12 ])
-        f.series(:name=>'Jane',:data=>[1, 3, 4, 3, 3, 5, 4,-46] )
-        f.title({ :text=>"example test title from controller"})
-        f.options[:chart][:defaultSeriesType] = "column"
-        f.plot_options({:column=>{:stacking=>"percent"}})
-      end
-
-      @h = LazyHighCharts::HighChart.new('graph') do |f|
-        f.title(:text => "Population vs GDP For 5 Big Countries [2009]")
-        f.xAxis(:categories => ["United States", "Japan", "China", "Germany", "France"])
-        f.series(:name => "GDP in Billions", :yAxis => 0, :data => [14119, 5068, 4985, 3339, 2656])
-        f.series(:name => "Population in Millions", :yAxis => 1, :data => [310, 127, 1340, 81, 65])
-
-        f.yAxis [
-          {:title => {:text => "GDP in Billions", :margin => 70} },
-          {:title => {:text => "Population in Millions"}, :opposite => true},
-        ]
-
-        f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
-        f.chart({:defaultSeriesType=>"column"})
-      end
-
       @data = {"status" => "ok", "data" => [{"2014-06-16 16:00:00" => 24.2},{"2014-06-17 12:00:00" => 30.2},{"2014-06-18 17:00:00" => 42.9}]}
       d = []
       @data['data'].each do |data|
@@ -100,7 +47,7 @@ class FactsController < ApplicationController
       @playground = LazyHighCharts::HighChart.new('graph') do |f|
         f.title(text: "Total final consumption")
         f.series(type: 'line', name: "USA", data: d)
-        f.xAxis(type: "datetime", dateTimeLabelFormats: {year: '%Y'})
+        f.xAxis(type: "datetime")
         f.yAxis(title: {:text => "Tetrajoule (TJ)", style: { color: '#333'}})
       end
     end
