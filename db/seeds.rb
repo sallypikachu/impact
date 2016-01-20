@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(username: "test", email: "test@m.com" , password: "12345678")
+User.create(username: "test", email: "test@m.com", password: "12345678")
 
 energy = Title.create(name: "Energy use (kg of oil equivalent per capita)")
 biodiversity = Title.create(name: "GEF benefits index for biodiversity")
