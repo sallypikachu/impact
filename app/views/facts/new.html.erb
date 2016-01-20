@@ -1,0 +1,44 @@
+<div class="column">
+  <div class="show-footer small-12 medium-10 medium-centered large-8 large-centered columns">
+    <h1>New Data Form</h1>
+
+    <%= form_for (@fact) do |f| %>
+
+    <div class="field">
+      <%= f.label :title_id %>
+      <%= f.select(:title_id) do %>
+        <% @titles.each do |option| %>
+          <%= content_tag(:option, option.first, value: option.last) %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :year_id %>
+      <%= f.select(:year_id) do %>
+        <% @years.each do |option| %>
+          <%= content_tag(:option, option.first, value: option.last) %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :location_id %>
+      <%= f.select(:location_id) do %>
+        <% @locations.each do |option| %>
+          <%= content_tag(:option, option.first, value: option.last) %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.label :data %><br />
+      <%= f.text_field :data %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Add Data" %>
+    </div>
+    <% end %>
+  </div>
+</div>

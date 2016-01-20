@@ -1,15 +1,39 @@
+<button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
+<hr>
 <% @tables.each do |table| %>
-<%= table[0].title.name %>
+<h2><%= table[0].title.name %></h2>
 <table>
   <tr>
     <td>Country</td>
     <td>Data</td>
+    <td>Year</td>
   </tr>
   <% table.each do |fact| %>
   <tr>
-    <td><%= fact.location %></td>
+    <td><%= fact.location.country %></td>
     <td><%= fact.data %></td>
+    <td><%= fact.year.year %>
   </tr>
   <% end %>
 </table>
+<% end %>
+
+<% @t.each do |table| %>
+  <% unless table.empty? %>
+    <h2><%= table[0].title.name %></h2>
+    <table>
+      <tr>
+        <td>Country</td>
+        <td>Data</td>
+        <td>Year</td>
+      </tr>
+      <% table.each do |fact| %>
+      <tr>
+        <td><%= fact.location.country %></td>
+        <td><%= fact.data %></td>
+        <td><%= fact.year.year %>
+      </tr>
+      <% end %>
+    </table>
+  <% end %>
 <% end %>
