@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(username: "test", email: "test@m.com" , password: "12345678")
+User.create(username: "test", email: "test@m.com", password: "12345678")
 
 energy = Title.create(name: "Energy use (kg of oil equivalent per capita)")
 biodiversity = Title.create(name: "GEF benefits index for biodiversity")
@@ -36,12 +36,12 @@ peru = Location.create(country: "Peru")
 
 
 Fact.create([
-  {title: energy, year: year2013, location: iceland, data: "16679"},
-  {title: energy, year: year2013, location: luxembourg, data: "7327"},
-  {title: energy, year: year2013, location: canada, data: "7149"},
-  {title: energy, year: year2013, location: us, data: "6909"},
-  {title: energy, year: year2013, location: norway, data: "6487"},
-  {title: energy, year: year2013, location: finland, data: "5933"},
+  { title: energy, year: year2013, location: iceland, data: "16679" },
+  { title: energy, year: year2013, location: luxembourg, data: "7327" },
+  { title: energy, year: year2013, location: canada, data: "7149" },
+  { title: energy, year: year2013, location: us, data: "6909" },
+  { title: energy, year: year2013, location: norway, data: "6487" },
+  { title: energy, year: year2013, location: finland, data: "5933" },
 
   {title: energy, year: year2012, location: iceland, data: "17756"},
   {title: energy, year: year2012, location: luxembourg, data: "7707"},
