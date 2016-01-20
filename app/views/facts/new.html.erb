@@ -5,7 +5,7 @@
     <%= form_for (@fact) do |f| %>
 
     <div class="field">
-      <%= f.label :title_id %>
+      <%= f.label :title_id, "Title" %>
       <%= f.select(:title_id) do %>
         <% @titles.each do |option| %>
           <%= content_tag(:option, option.first, value: option.last) %>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :year_id %>
+      <%= f.label :year_id, "Year" %>
       <%= f.select(:year_id) do %>
         <% @years.each do |option| %>
           <%= content_tag(:option, option.first, value: option.last) %>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="field">
-      <%= f.label :location_id %>
+      <%= f.label :location_id, "Country" %>
       <%= f.select(:location_id) do %>
         <% @locations.each do |option| %>
           <%= content_tag(:option, option.first, value: option.last) %>
