@@ -1,0 +1,24 @@
+<button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
+<hr>
+<%= high_chart("playground", @playground) %>
+<hr>
+
+<%= @info[1][0]["indicator"]["value"] %>
+<table>
+  <tr>
+    <td>Country</td>
+    <% @info[1].each do |info| %>
+    <% if info["value"] %>
+    <td><%= info["date"] %></td>
+    <% end %>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= @info[1][0]["country"]["value"] %></td>
+<% @info[1].each do |info| %>
+<% if info["value"] %>
+<td><%= info["value"] %></td>
+<% end %>
+<% end %>
+</tr>
+</table>

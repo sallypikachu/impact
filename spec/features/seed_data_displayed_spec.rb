@@ -19,7 +19,7 @@ feature "visit home page to see tables/charts/maps" do
       { title: biodiversity, year: year2008, location: brazil, data: "100.0" },
       { title: biodiversity, year: year2008, location: japan, data: "36.0" }
     ])
-    visit root_path
+    visit facts_path
 
     expect(page).to have_content("EF benefits index for biodiversity")
     expect(page).to have_content("Brazil")
