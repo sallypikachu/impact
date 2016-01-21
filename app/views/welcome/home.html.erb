@@ -1,6 +1,7 @@
-<button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
-<hr>
-<%= high_chart("playground", @playground) %>
+<div id="container" style="width:100%; height:400px;"></div>
+
+<%= high_chart("energy_data", @energy) %>
+<%= high_chart("bio_data", @bio) %>
 <hr>
 
 <%= @info[1][0]["indicator"]["value"] %>
@@ -22,3 +23,129 @@
 <% end %>
 </tr>
 </table>
+
+<button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
+<ul class="accordion" data-accordion data-allow-all-closed="true" role="tablist">
+  <li class="accordion-item">
+    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
+    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">Accordion 1</a>
+    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
+    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
+      <button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
+      <div class="column">
+        <div class="small-12 medium-10 medium-centered large-8 large-centered columns">
+          <h1>New Data Form</h1>
+
+          <%= form_for (@fact) do |f| %>
+
+          <div class="field">
+            <%= f.label :title_id, "Title" %>
+            <%= f.select(:title_id) do %>
+            <% @titles.each do |option| %>
+            <%= content_tag(:option, option.first, value: option.last) %>
+            <% end %>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :year_id, "Year" %>
+            <%= f.select(:year_id) do %>
+            <% @years.each do |option| %>
+            <%= content_tag(:option, option.first, value: option.last) %>
+            <% end %>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :location_id, "Country" %>
+            <%= f.select(:location_id) do %>
+            <% @locations.each do |option| %>
+            <%= content_tag(:option, option.first, value: option.last) %>
+            <% end %>
+            <% end %>
+          </div>
+
+          <div class="field">
+            <%= f.label :data %><br />
+            <%= f.text_field :data %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "Add Data" %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+  </li>
+</ul>
+<script>
+$(function() {
+  $('#container').highcharts({
+    chart: {
+      type: 'spline'
+    },
+    title: {
+      text: 'Combo'
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: { year: '%Y'},
+      title: {
+        text: 'Year'
+      }
+    },
+    yAxis: [{ // Primary yAxis
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: 'Temperature',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            min: 5000,
+        }, { // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+
+                text: 'Rainfall',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true
+        }],
+
+    plotOptions: {
+      spline: {
+        marker: {
+          enabled: true
+        }
+      }
+    },
+
+    series: [{
+      name: 'USA',
+      data: <%= @energy_data %>
+    }, {
+      name: 'Canada',
+      data: [
+        [Date.UTC(2013, 0, 1), 7149],
+        [Date.UTC(2012, 0, 1), 7226],
+        [Date.UTC(2011, 0, 1), 7367],
+        [Date.UTC(2010, 0, 1), 7390]
+      ]
+    }]
+  });
+});
+</script>
