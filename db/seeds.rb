@@ -55,12 +55,12 @@ Fact.create([
   { title: energy, year: Year.find_by(year: 2011), location: norway, data: "5652" },
   { title: energy, year: Year.find_by(year: 2011), location: finland, data: "6464" },
 
-  { title: energy, year: Year.find_by(year: 2010, location: iceland, data: "16882" },
-  { title: energy, year: Year.find_by(year: 2010, location: luxembourg, data: "8322" },
-  { title: energy, year: Year.find_by(year: 2010, location: canada, data: "7390" },
-  { title: energy, year: Year.find_by(year: 2010, location: us, data: "7162" },
-  { title: energy, year: Year.find_by(year: 2010, location: norway, data: "6621" },
-  { title: energy, year: Year.find_by(year: 2010, location: finland, data: "6808" },
+  { title: energy, year: Year.find_by(year: 2010), location: iceland, data: "16882" },
+  { title: energy, year: Year.find_by(year: 2010), location: luxembourg, data: "8322" },
+  { title: energy, year: Year.find_by(year: 2010), location: canada, data: "7390" },
+  { title: energy, year: Year.find_by(year: 2010), location: us, data: "7162" },
+  { title: energy, year: Year.find_by(year: 2010), location: norway, data: "6621" },
+  { title: energy, year: Year.find_by(year: 2010), location: finland, data: "6808" },
 
   { title: energy, year: Year.find_by(year: 2009), location: iceland, data: "16905" },
 
