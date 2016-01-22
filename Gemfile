@@ -12,6 +12,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'dotenv-rails'
 gem 'devise'
 gem 'foundation-rails'
+gem 'lazy_high_charts'
+gem 'turbolinks', '~> 2.5', '>= 2.5.3'
 
 group :development, :test do
   gem 'byebug'

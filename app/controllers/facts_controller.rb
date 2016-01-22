@@ -35,9 +35,6 @@ class FactsController < ApplicationController
       data[:country_data] = countries_data
       @tables[title.name] = data
     end
-    url = "http://api.worldbank.org/countries/USA/indicators/8.1.1_FINAL.ENERGY.CONSUMPTION?per_page=500&date=1960:2016&format=json"
-    info = Net::HTTP.get_response(URI(url)).body
-    @info = JSON.parse(info)
   end
 
   def show
@@ -75,10 +72,10 @@ class FactsController < ApplicationController
 
   def fact_params
     params.require(:fact).permit(
-      :title_id,
-      :year_id,
-      :location_id,
-      :data,
+    :title_id,
+    :year_id,
+    :location_id,
+    :data,
     )
   end
 end

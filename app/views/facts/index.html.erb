@@ -19,22 +19,3 @@
     </table>
   <% end %>
 <% end %>
-
-<%= @info[1][0]["indicator"]["value"] %>
-<table>
-  <tr>
-    <td>Country</td>
-    <% @info[1].each do |info| %>
-    <% if info["value"] %>
-    <td><%= info["date"] %></td>
-    <% end %>
-    <% end %>
-  </tr>
-  <tr>
-    <td><%= @info[1][0]["country"]["value"] %></td>
-<% @info[1].each do |info| %>
-<% if info["value"] %>
-<td><%= info["value"] %></td>
-<% end %>
-<% end %>
-</tr>

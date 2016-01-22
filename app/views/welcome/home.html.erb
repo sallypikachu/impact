@@ -1,0 +1,94 @@
+<div id="container" style="width:100%; height:400px;"></div>
+
+<%= high_chart("energy_data", @energy) %>
+<%= high_chart("bio_data", @bio) %>
+<hr>
+
+<%= @info[1][0]["indicator"]["value"] %>
+<table>
+  <tr>
+    <td>Country</td>
+    <% @info[1].each do |info| %>
+    <% if info["value"] %>
+    <td><%= info["date"] %></td>
+    <% end %>
+    <% end %>
+  </tr>
+  <tr>
+    <td><%= @info[1][0]["country"]["value"] %></td>
+<% @info[1].each do |info| %>
+<% if info["value"] %>
+<td><%= info["value"] %></td>
+<% end %>
+<% end %>
+</tr>
+</table>
+
+<button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
+
+<script>
+$(function() {
+  $('#container').highcharts({
+    chart: {
+      type: 'spline'
+    },
+    title: {
+      text: 'Energy Use vs Biodiversity in USA'
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: { year: '%Y'},
+      title: {
+        text: 'Year'
+      }
+    },
+    yAxis: [{ // Primary yAxis
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+            title: {
+                text: 'Energy Use',
+                style: {
+                    color: Highcharts.getOptions().colors[1]
+                }
+            },
+        }, { // Secondary yAxis
+            gridLineWidth: 0,
+            title: {
+
+                text: 'Biodiversity Richness',
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            labels: {
+                style: {
+                    color: Highcharts.getOptions().colors[0]
+                }
+            },
+            opposite: true
+        }],
+
+    plotOptions: {
+      spline: {
+        marker: {
+          enabled: true
+        }
+      }
+    },
+
+    series: [{
+      name: 'Biodiversity',
+      yAxis: 1,
+      type: "spline",
+      data: <%= @bio_data %>
+    }, {
+      name: 'Energy Use',
+      yAxis: 0,
+      data: <%= @energy_data %>
+    }]
+  });
+});
+</script>
