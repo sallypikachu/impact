@@ -16,63 +16,66 @@ end
 
 a = JSON.parse(Net::HTTP.get_response(URI("http://apiv3.iucnredlist.org/api/v3/country/list?token=5d6279ab12fcdff4656202461bd97157972fa09db6e3c097e77e58ed4f87a653")).body)
 
-iceland = Location.create(country: "Iceland")
-luxembourg = Location.create(country: "Luxembourg")
-canada = Location.create(country: "Canada")
-us = Location.create(country: "United States")
-norway = Location.create(country: "Norway")
-finland = Location.create(country: "Finland")
-brazil = Location.create(country: "Brazil")
-australia = Location.create(country: "Australia")
-indonesia = Location.create(country: "Indonesia")
-mexico = Location.create(country: "Mexico")
-china = Location.create(country: "China")
-colombia = Location.create(country: "Colombia")
-india = Location.create(country: "India")
-japan = Location.create(country: "Japan")
-russia = Location.create(country: "Russia")
-peru = Location.create(country: "Peru")
-
+a["results"].each do |country|
+  Location.create(country: country["country"], isocode: country["isocode"])
+end
+# iceland = Location.create(country: "Iceland")
+# luxembourg = Location.create(country: "Luxembourg")
+# canada = Location.create(country: "Canada")
+# us = Location.create(country: "United States")
+# norway = Location.create(country: "Norway")
+# finland = Location.create(country: "Finland")
+# brazil = Location.create(country: "Brazil")
+# australia = Location.create(country: "Australia")
+# indonesia = Location.create(country: "Indonesia")
+# mexico = Location.create(country: "Mexico")
+# china = Location.create(country: "China")
+# colombia = Location.create(country: "Colombia")
+# india = Location.create(country: "India")
+# japan = Location.create(country: "Japan")
+# russia = Location.create(country: "Russia")
+# peru = Location.create(country: "Peru")
+#
 Fact.create([
-  { title: energy, year: Year.find_by(year: 2013), location: iceland, data: "16679" },
-  { title: energy, year: Year.find_by(year: 2013), location: luxembourg, data: "7327" },
-  { title: energy, year: Year.find_by(year: 2013), location: canada, data: "7149" },
-  { title: energy, year: Year.find_by(year: 2013), location: us, data: "6909" },
-  { title: energy, year: Year.find_by(year: 2013), location: norway, data: "6487" },
-  { title: energy, year: Year.find_by(year: 2013), location: finland, data: "5933" },
+  { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Iceland"), data: "16679" },
+  { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Luxembourg"), data: "7327" },
+  { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Canada"), data: "7149" },
+  { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "United States"), data: "6909" },
+  { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Norway"), data: "6487" },
+  { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Finland"), data: "5933" },
 
-  { title: energy, year: Year.find_by(year: 2012), location: iceland, data: "17756" },
-  { title: energy, year: Year.find_by(year: 2012), location: luxembourg, data: "7707" },
-  { title: energy, year: Year.find_by(year: 2012), location: canada, data: "7226" },
-  { title: energy, year: Year.find_by(year: 2012), location: us, data: "6815" },
-  { title: energy, year: Year.find_by(year: 2012), location: norway, data: "5817" },
-  { title: energy, year: Year.find_by(year: 2012), location: finland, data: "6151" },
+  { title: energy, year: Year.find_by(year: 2012), location: Location.find_by(country: "Iceland"), data: "17756" },
+  { title: energy, year: Year.find_by(year: 2012), location: Location.find_by(country: "Luxembourg"), data: "7707" },
+  { title: energy, year: Year.find_by(year: 2012), location: Location.find_by(country: "Canada"), data: "7226" },
+  { title: energy, year: Year.find_by(year: 2012), location: Location.find_by(country: "United States"), data: "6815" },
+  { title: energy, year: Year.find_by(year: 2012), location: Location.find_by(country: "Norway"), data: "5817" },
+  { title: energy, year: Year.find_by(year: 2012), location: Location.find_by(country: "Finland"), data: "6151" },
 
-  { title: energy, year: Year.find_by(year: 2011), location: iceland, data: "17964" },
-  { title: energy, year: Year.find_by(year: 2011), location: luxembourg, data: "8044" },
-  { title: energy, year: Year.find_by(year: 2011), location: canada, data: "7367" },
-  { title: energy, year: Year.find_by(year: 2011), location: us, data: "7029" },
-  { title: energy, year: Year.find_by(year: 2011), location: norway, data: "5652" },
-  { title: energy, year: Year.find_by(year: 2011), location: finland, data: "6464" },
+  { title: energy, year: Year.find_by(year: 2011), location: Location.find_by(country: "Iceland"), data: "17964" },
+  { title: energy, year: Year.find_by(year: 2011), location: Location.find_by(country: "Luxembourg"), data: "8044" },
+  { title: energy, year: Year.find_by(year: 2011), location: Location.find_by(country: "Canada"), data: "7367" },
+  { title: energy, year: Year.find_by(year: 2011), location: Location.find_by(country: "United States"), data: "7029" },
+  { title: energy, year: Year.find_by(year: 2011), location: Location.find_by(country: "Norway"), data: "5652" },
+  { title: energy, year: Year.find_by(year: 2011), location: Location.find_by(country: "Finland"), data: "6464" },
 
-  { title: energy, year: Year.find_by(year: 2010), location: iceland, data: "16882" },
-  { title: energy, year: Year.find_by(year: 2010), location: luxembourg, data: "8322" },
-  { title: energy, year: Year.find_by(year: 2010), location: canada, data: "7390" },
-  { title: energy, year: Year.find_by(year: 2010), location: us, data: "7162" },
-  { title: energy, year: Year.find_by(year: 2010), location: norway, data: "6621" },
-  { title: energy, year: Year.find_by(year: 2010), location: finland, data: "6808" },
+  { title: energy, year: Year.find_by(year: 2010), location: Location.find_by(country: "Iceland"), data: "16882" },
+  { title: energy, year: Year.find_by(year: 2010), location: Location.find_by(country: "Luxembourg"), data: "8322" },
+  { title: energy, year: Year.find_by(year: 2010), location: Location.find_by(country: "Canada"), data: "7390" },
+  { title: energy, year: Year.find_by(year: 2010), location: Location.find_by(country: "United States"), data: "7162" },
+  { title: energy, year: Year.find_by(year: 2010), location: Location.find_by(country: "Norway"), data: "6621" },
+  { title: energy, year: Year.find_by(year: 2010), location: Location.find_by(country: "Finland"), data: "6808" },
 
-  { title: energy, year: Year.find_by(year: 2009), location: iceland, data: "16905" },
+  { title: energy, year: Year.find_by(year: 2009), location: Location.find_by(country: "Iceland"), data: "16905" },
 
-  { title: biodiversity, year: Year.find_by(year: 2008), location: brazil, data: "100.0" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: us, data: "94.2" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: australia, data: "87.7" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: indonesia, data: "81.0" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: mexico, data: "68.7" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: china, data: "66.6" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: colombia, data: "51.5" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: india, data: "39.9" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: japan, data: "36.0" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: russia, data: "34.1" },
-  { title: biodiversity, year: Year.find_by(year: 2008), location: peru, data: "33.4" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Brazil"), data: "100.0" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "United States"), data: "94.2" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Australia"), data: "87.7" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Indonesia"), data: "81.0" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Mexico"), data: "68.7" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "China"), data: "66.6" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Colombia"), data: "51.5" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "India"), data: "39.9" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Japan"), data: "36.0" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Russia"), data: "34.1" },
+  { title: biodiversity, year: Year.find_by(year: 2008), location: Location.find_by(country: "Peru"), data: "33.4" },
 ])
