@@ -25,61 +25,6 @@
 </table>
 
 <button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
-<ul class="accordion" data-accordion data-allow-all-closed="true" role="tablist">
-  <li class="accordion-item">
-    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
-    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">Accordion 1</a>
-    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
-    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
-      <button type="button" class="button"> <%= link_to "Add new data", new_fact_path(@fact) %></button>
-      <div class="column">
-        <div class="small-12 medium-10 medium-centered large-8 large-centered columns">
-          <h1>New Data Form</h1>
-
-          <%= form_for (@fact) do |f| %>
-
-          <div class="field">
-            <%= f.label :title_id, "Title" %>
-            <%= f.select(:title_id) do %>
-            <% @titles.each do |option| %>
-            <%= content_tag(:option, option.first, value: option.last) %>
-            <% end %>
-            <% end %>
-          </div>
-
-          <div class="field">
-            <%= f.label :year_id, "Year" %>
-            <%= f.select(:year_id) do %>
-            <% @years.each do |option| %>
-            <%= content_tag(:option, option.first, value: option.last) %>
-            <% end %>
-            <% end %>
-          </div>
-
-          <div class="field">
-            <%= f.label :location_id, "Country" %>
-            <%= f.select(:location_id) do %>
-            <% @locations.each do |option| %>
-            <%= content_tag(:option, option.first, value: option.last) %>
-            <% end %>
-            <% end %>
-          </div>
-
-          <div class="field">
-            <%= f.label :data %><br />
-            <%= f.text_field :data %>
-          </div>
-
-          <div class="actions">
-            <%= f.submit "Add Data" %>
-          </div>
-          <% end %>
-        </div>
-      </div>
-
-    </div>
-  </li>
-</ul>
 <script>
 $(function() {
   $('#container').highcharts({
