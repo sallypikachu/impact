@@ -10,12 +10,11 @@ User.create(username: "test", email: "test@m.com", password: "12345678")
 energy = Title.create(name: "Energy use (kg of oil equivalent per capita)")
 biodiversity = Title.create(name: "GEF benefits index for biodiversity")
 
-year2013 = Year.create(year: 2013)
-year2012 = Year.create(year: 2012)
-year2011 = Year.create(year: 2011)
-year2010 = Year.create(year: 2010)
-year2009 = Year.create(year: 2009)
-year2008 = Year.create(year: 2008)
+(1960..2015).each do |year|
+  Year.create(year: year)
+end
+
+a = JSON.parse(Net::HTTP.get_response(URI("http://apiv3.iucnredlist.org/api/v3/country/list?token=5d6279ab12fcdff4656202461bd97157972fa09db6e3c097e77e58ed4f87a653")).body)
 
 iceland = Location.create(country: "Iceland")
 luxembourg = Location.create(country: "Luxembourg")
