@@ -37,9 +37,9 @@ class WelcomeController < ApplicationController
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
 
-    @bio = []
-    @info[1].map {|y| @bio << [y["date"], y["value"].to_f] if y["value"]}
-    @bio.each do |y|
+    @bio_data = []
+    @info[1].map {|y| @bio_data << [y["date"], y["value"].to_f] if y["value"]}
+    @bio_data.each do |y|
       if y[1]
         y[0] = DateTime.parse("#{y[0]}-01-01 00:00:00").to_i*1000
       end
@@ -47,7 +47,7 @@ class WelcomeController < ApplicationController
     @bio = LazyHighCharts::HighChart.new('graph') do |f|
       f.chart(defaultSeriesType: "spline")
       f.title(text: "Biodiversity")
-      f.series(name: "USA", data: @bio)
+      f.series(name: "USA", data: @bio_data)
       f.xAxis(type: "datetime")
       f.yAxis(title: {:text => "GEF", style: { color: '#333'}})
     end
