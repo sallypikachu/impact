@@ -45,23 +45,7 @@ a = JSON.parse(Net::HTTP.get_response(URI("http://apiv3.iucnredlist.org/api/v3/c
 a["results"].each do |country|
   Location.create(country: country["country"], isocode: country["isocode"])
 end
-# iceland = Location.create(country: "Iceland")
-# luxembourg = Location.create(country: "Luxembourg")
-# canada = Location.create(country: "Canada")
-# us = Location.create(country: "United States")
-# norway = Location.create(country: "Norway")
-# finland = Location.create(country: "Finland")
-# brazil = Location.create(country: "Brazil")
-# australia = Location.create(country: "Australia")
-# indonesia = Location.create(country: "Indonesia")
-# mexico = Location.create(country: "Mexico")
-# china = Location.create(country: "China")
-# colombia = Location.create(country: "Colombia")
-# india = Location.create(country: "India")
-# japan = Location.create(country: "Japan")
-# russia = Location.create(country: "Russia")
-# peru = Location.create(country: "Peru")
-#
+
 Fact.create([
   { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Iceland"), data: "16679" },
   { title: energy, year: Year.find_by(year: 2013), location: Location.find_by(country: "Luxembourg"), data: "7327" },

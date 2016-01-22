@@ -1,4 +1,4 @@
-class FactsController < ApplicationController
+class DataController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def choose_data
@@ -13,6 +13,7 @@ class FactsController < ApplicationController
   end
 
   def display_data
+    binding.pry
   end
 
   def index

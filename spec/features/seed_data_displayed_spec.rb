@@ -10,6 +10,7 @@ require "rails_helper"
 
 feature "visit home page to see tables/charts/maps" do
   scenario "visit home page to see the biodiversity map" do
+    skip
     biodiversity = Title.create(name: "GEF benefits index for biodiversity")
     year2008 = Year.create(year: 2008)
     brazil = Location.create(country: "Brazil", isocode: "BR")

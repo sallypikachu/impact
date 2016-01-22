@@ -11,10 +11,10 @@ feature "sees profile in top bar" do
 
   scenario "user visits index page" do
     visit root_path
-    click_link "Display different data"
+    click_link "Choose your own data"
 
-    select "Brazil", from: "Location"
-    select "Population density (people per sq. km of land area)", from: "Data sets"
+    select "Brazil", from: "country"
+    select "Population density (people per sq. km of land area)", from: "title"
     click_on "Display Data"
 
     expect(page).to have_content("Population density (people per sq. km of land area)")
