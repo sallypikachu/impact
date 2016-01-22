@@ -10,6 +10,32 @@ User.create(username: "test", email: "test@m.com", password: "12345678")
 energy = Title.create(name: "Energy use (kg of oil equivalent per capita)")
 biodiversity = Title.create(name: "GEF benefits index for biodiversity")
 
+# "AG.CON.FERT.PT.ZS","Fertilizer consumption (% of fertilizer production)","Agriculture & Rural Development"
+# "AG.CON.FERT.ZS","Fertilizer consumption (kilograms per hectare of arable land)","Agriculture & Rural Development"
+# "AG.LND.AGRI.ZS","Agricultural land (% of land area)","Climate Change","Agriculture & Rural Development"
+# "AG.LND.ARBL.HA","Arable land (hectares)","Agriculture & Rural Development"
+# "AG.LND.ARBL.HA.PC","Arable land (hectares per person)","Agriculture & Rural Development"
+# "AG.LND.ARBL.ZS","Arable land (% of land area),""Agriculture & Rural Development"
+# "AG.LND.CROP.ZS","Permanent cropland (% of land area)","Agriculture & Rural Development"
+# "AG.LND.PRCP.MM","Average precipitation in depth (mm per year)","Agriculture & Rural Development"
+# "AG.LND.TOTL.K2","Land area (sq. km)","Agriculture & Rural Development"
+# "AG.PRD.CROP.XD","Crop production index (2004-2006 = 100)","Agriculture & Rural Development"
+# "AG.PRD.FOOD.XD","Food production index (2004-2006 = 100)","Agriculture & Rural Development"
+# "AG.PRD.LVSK.XD","Livestock production index (2004-2006 = 100)","Agriculture & Rural Development"
+# "EN.AGR.EMPL","Economically active population in agriculture (number)","Agriculture & Rural Development"
+#
+# "DT.DIS.IDAG.CD","IDA grants (current US$)","External Debt","Aid Effectiveness"
+#
+# "AG.LND.FRST.K2","Forest area (sq. km)","Environment","Agriculture & Rural Development","Climate Change"
+# "AG.LND.IRIG.AG.ZS","Agricultural irrigated land (% of total agricultural land)","Agriculture & Rural Development","Climate Change"
+#
+# "ER.LND.PTLD.ZS","Terrestrial protected areas (% of total land area)","Environment","Climate Change"
+#
+# "BN.GSR.FCTY.CD","Net primary income (BoP, current US$)","Economy & Growth"
+#
+# "EG.GDP.PUSE.KO.PP","GDP per unit of energy use (PPP $ per kg of oil equivalent)","Energy & Mining"
+# "EG.GDP.PUSE.KO.PP.KD","GDP per unit of energy use (constant 2011 PPP $ per kg of oil equivalent)","Energy & Mining"
+
 (1960..2015).each do |year|
   Year.create(year: year)
 end
