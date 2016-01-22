@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
     Location.all.each do |location|
       @locations << [location.country, location.id]
     end
-    url = "http://api.worldbank.org/countries/USA/indicators/8.1.1_FINAL.ENERGY.CONSUMPTION?per_page=500&date=1960:2016&format=json"
+    url = "http://api.worldbank.org/countries/BR/indicators/EG.USE.PCAP.KG.OE?per_page=500&date=1960:2016&format=json"
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
 
@@ -25,6 +25,11 @@ class WelcomeController < ApplicationController
       end
     end
 
+    @energy_hash = {}
+    @energy_hash["title"] = @info[1][1]["indicator"]["value"]
+    @energy_hash["country"] = @info[1][1]["country"]["value"]
+    @energy_hash["data"] = @energy_data
+
     @energy = LazyHighCharts::HighChart.new('graph') do |f|
       f.chart(defaultSeriesType: "spline")
       f.title(text: "Total final consumption")
@@ -33,7 +38,7 @@ class WelcomeController < ApplicationController
       f.yAxis(title: {:text => "Tetrajoule (TJ)", style: { color: '#333'}})
     end
 
-    url = "http://api.worldbank.org/countries/USA/indicators/ER.BDV.TOTL.XQ?per_page=500&date=1960:2016&format=json"
+    url = "http://api.worldbank.org/countries/BR/indicators/AG.LND.FRST.ZS?per_page=500&date=1960:2016&format=json"
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
 
@@ -44,6 +49,11 @@ class WelcomeController < ApplicationController
         y[0] = DateTime.parse("#{y[0]}-01-01 00:00:00").to_i*1000
       end
     end
+
+    @bio_hash = {}
+    @bio_hash["title"] = @info[1][1]["indicator"]["value"]
+    @bio_hash["data"] = @bio_data
+
     @bio = LazyHighCharts::HighChart.new('graph') do |f|
       f.chart(defaultSeriesType: "spline")
       f.title(text: "Biodiversity")

@@ -1,7 +1,4 @@
 <div id="container" style="width:100%; height:400px;"></div>
-
-<%= high_chart("energy_data", @energy) %>
-<%= high_chart("bio_data", @bio) %>
 <hr>
 
 <%= @info[1][0]["indicator"]["value"] %>
@@ -33,7 +30,7 @@ $(function() {
       type: 'spline'
     },
     title: {
-      text: 'Energy Use vs Biodiversity in USA'
+      text: '<%= @energy_hash["title"]%> vs <%= @bio_hash["title"] %> of <%= @energy_hash["country"] %>',
     },
     xAxis: {
       type: 'datetime',
@@ -49,7 +46,7 @@ $(function() {
                 }
             },
             title: {
-                text: 'Energy Use',
+                text: '<%= @energy_hash["title"] %>',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
@@ -58,7 +55,7 @@ $(function() {
             gridLineWidth: 0,
             title: {
 
-                text: 'Biodiversity Richness',
+                text: '<%= @bio_hash["title"] %>',
                 style: {
                     color: Highcharts.getOptions().colors[0]
                 }
@@ -80,14 +77,14 @@ $(function() {
     },
 
     series: [{
-      name: 'Biodiversity',
+      name: '<%= @bio_hash["title"] %>',
       yAxis: 1,
       type: "spline",
       data: <%= @bio_data %>
     }, {
-      name: 'Energy Use',
+      name: '<%= @energy_hash["title"] %>',
       yAxis: 0,
-      data: <%= @energy_data %>
+      data: <%= @energy_hash["data"] %>
     }]
   });
 });
