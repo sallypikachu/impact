@@ -1,0 +1,45 @@
+<button type="button" class="button text-center"> <%= link_to "Choose your own data", data_path %></button>
+<hr>
+<div id="container" style="width:100%; height:400px;"></div>
+
+<script>
+$(function () {
+    $('#container').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: '<%= @info_hash["title"] %> of <%= @info_hash["country"] %>'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                year: '%Y'
+            },
+            title: {
+                text: 'Year'
+            }
+        },
+        yAxis: {
+            title: {
+                text: '<%= @info_hash["title"] %>'
+            }
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br>',
+            pointFormat: '{point.x:%Y}: {point.y:.1f}'
+        },
+        plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            }
+        },
+        series: [{
+            name: '<%= @info_hash["title"] %>',
+            data: <%= @info_hash["data"] %>
+        }]
+    });
+});
+</script>

@@ -3,10 +3,12 @@
     <h1>Choose your data</h1>
 
     <%= form_tag do %>
+
       <div class="field">
         <%= label_tag(:title, "Data sets") %>
-        <%= select_tag(:title, options_for_select(@titles)) %>
+        <%= select_tag(:title, options_for_select(@titles), {multiple: true, size: 2} ) %>
       </div>
+
 
       <div class="field">
         <%= label_tag(:country, "Countries") %>

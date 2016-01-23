@@ -1,96 +1,78 @@
 class DataController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
 
   def choose_data
     @titles = []
     Title.all.each do |title|
-      @titles << [title.name, title.id]
+      @titles << [title.name, title.value]
     end
     @locations = []
     Location.all.each do |location|
-      @locations << [location.country, location.id]
+      @locations << [location.country, location.isocode]
     end
+    @locations.sort!
   end
 
   def display_data
+    info = []
+    params["title"].each do |title|
+      url = "http://api.worldbank.org/countries/#{params[:country]}/indicators/#{title}?per_page=500&date=1960:2016&format=json"
+      info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+    end
+
+    infos_data = []
+    info.each do |dataset|
+      set = {}
+      data = []
+      dataset.map do |datum|
+        data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i*1000, datum["value"].to_f] if datum["value"]
+      end
+      set["title"] = dataset[1]["indicator"]["value"]
+      set["country"] = dataset[1]["country"]["value"]
+      set["data"] = data
+      infos_data << set
+    end
     binding.pry
+
+    info_data = []
+    info[1].map do |y|
+      info_data << [y["date"], y["value"].to_f] if y["value"]
+    end
+    info_data.each do |y|
+      if y[1]
+        y[0] = DateTime.parse("#{y[0]}-01-01 00:00:00").to_i*1000
+      end
+    end
+
+    @info_hash = {}
+    @info_hash["title"] = info[1][1]["indicator"]["value"]
+    @info_hash["country"] = info[1][1]["country"]["value"]
+    @info_hash["data"] = info_data
   end
 
-  def index
-    titles = Title.all
-    years = Year.all
-    @t = []
-    titles.each do |title|
-      years.each do |year|
-        @t << Fact.where(title: title, year: year)
+  def display1
+    url = "http://api.worldbank.org/countries/#{params[:country]}/indicators/#{params[:title]}?per_page=500&date=1960:2016&format=json"
+    info = JSON.parse(Net::HTTP.get_response(URI(url)).body)
+
+    info_data = []
+    info[1].map do |y|
+      info_data << [y["date"], y["value"].to_f] if y["value"]
+    end
+    info_data.each do |y|
+      if y[1]
+        y[0] = DateTime.parse("#{y[0]}-01-01 00:00:00").to_i*1000
       end
     end
-    @tables = {}
-    titles.each do |title|
-      uniq_years = title.years.map{|x| x.year}.uniq.sort
-      uniq_locations = title.locations.map{|x| x.country}.uniq
-      @tables[title.name] = {}
-      data = {}
-      countries_data = []
-      uniq_locations.each do |location|
-        country_data = []
-        uniq_years.each do |year|
-          year_data = Fact.where(title: Title.find_by(name: title.name), location: Location.find_by(country: location), year: Year.find_by(year: year))
-          if year_data[0]
-            country_data << year_data[0].data
-          else
-            country_data << ""
-          end
-        end
-        country_data.unshift(location)
-        countries_data << country_data
-      end
-      uniq_years.unshift("Country")
-      data[:columns] = uniq_years
-      data[:country_data] = countries_data
-      @tables[title.name] = data
-    end
+
+    @info_hash = {}
+    @info_hash["title"] = info[1][1]["indicator"]["value"]
+    @info_hash["country"] = info[1][1]["country"]["value"]
+    @info_hash["data"] = info_data
+  end
+
+  def display2
   end
 
   def show
   end
 
-  def new
-    @fact = Fact.new
-    @title = Title.new
-    @year = Year.new
-    @titles = []
-    Title.all.each do |title|
-      @titles << [title.name, title.id]
-    end
-    @years = []
-    Year.all.each do |year|
-      @years << [year.year, year.id]
-    end
-    @locations = []
-    Location.all.each do |location|
-      @locations << [location.country, location.id]
-    end
-  end
-
-  def create
-    @fact = Fact.new(fact_params)
-    @fact.user = current_user
-    if @fact.save
-      flash.notice = "Venue added successfully"
-      redirect_to facts_path
-    else
-      flash.notice = @fact.errors.full_messages.join(". ")
-      render "new"
-    end
-  end
-
-  def fact_params
-    params.require(:fact).permit(
-    :title_id,
-    :year_id,
-    :location_id,
-    :data,
-    )
-  end
 end
