@@ -2,82 +2,42 @@
 <hr>
 <button type="button" class="button text-center"> <%= link_to "Choose your own data", data_path %></button>
 
-<hr>
-
-<%= @info[1][0]["indicator"]["value"] %>
-<table>
-  <tr>
-    <td>Country</td>
-    <% @info[1].each do |info| %>
-    <% if info["value"] %>
-    <td><%= info["date"] %></td>
-    <% end %>
-    <% end %>
-  </tr>
-  <tr>
-    <td><%= @info[1][0]["country"]["value"] %></td>
-<% @info[1].each do |info| %>
-<% if info["value"] %>
-<td><%= info["value"] %></td>
-<% end %>
-<% end %>
-</tr>
-</table>
-
-
 <script>
 $(function() {
   $('#container').highcharts({
-    chart: {
-      type: 'spline'
-    },
+    chart: { type: 'spline' },
     title: {
       text: '<%= @energy_hash["title"]%> vs <%= @bio_hash["title"] %> of <%= @energy_hash["country"] %>',
     },
     xAxis: {
       type: 'datetime',
       dateTimeLabelFormats: { year: '%Y'},
-      title: {
-        text: 'Year'
-      }
+      title: { text: 'Year' }
     },
     yAxis: [{ // Primary yAxis
-            labels: {
-                style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-            },
-            title: {
-                text: '<%= @energy_hash["title"] %>',
-                style: {
-                    color: Highcharts.getOptions().colors[1]
-                }
-            },
-        }, { // Secondary yAxis
-            gridLineWidth: 0,
-            title: {
-
-                text: '<%= @bio_hash["title"] %>',
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            labels: {
-                style: {
-                    color: Highcharts.getOptions().colors[0]
-                }
-            },
-            opposite: true
-        }],
-
+      labels: {
+        style: { color: Highcharts.getOptions().colors[1] }
+        },
+        title: {
+          text: '<%= @energy_hash["title"] %>',
+          style: { color: Highcharts.getOptions().colors[1] }
+        },
+      }, { // Secondary yAxis
+        gridLineWidth: 0,
+        title: {
+          text: '<%= @bio_hash["title"] %>',
+          style: { color: Highcharts.getOptions().colors[0] }
+        },
+        labels: {
+          style: { color: Highcharts.getOptions().colors[0] }
+        },
+        opposite: true
+      }],
     plotOptions: {
       spline: {
-        marker: {
-          enabled: true
-        }
+        marker: { enabled: true }
       }
     },
-
     series: [{
       name: '<%= @bio_hash["title"] %>',
       yAxis: 1,
