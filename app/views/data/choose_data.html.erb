@@ -1,0 +1,23 @@
+<div class="column">
+  <div class="small-12 medium-10 medium-centered large-8 large-centered columns">
+    <h1>Choose your data</h1>
+
+    <%= form_tag do %>
+
+      <div class="field">
+        <%= label_tag(:title, "Data sets") %>
+        <%= select_tag(:title, options_for_select(@titles), {multiple: true, size: 2} ) %>
+      </div>
+
+
+      <div class="field">
+        <%= label_tag(:country, "Countries") %>
+        <%= select_tag(:country, options_for_select(@locations)) %>
+      </div>
+
+      <div class="actions">
+        <%= submit_tag ("Display data") %>
+      </div>
+    <% end %>
+  </div>
+</div>
