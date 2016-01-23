@@ -19,7 +19,7 @@ class DataController < ApplicationController
       info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
     end
 
-    infos_data = []
+    @infos_data = []
     info.each do |dataset|
       set = {}
       data = []
@@ -29,12 +29,11 @@ class DataController < ApplicationController
       set["title"] = dataset[1]["indicator"]["value"]
       set["country"] = dataset[1]["country"]["value"]
       set["data"] = data
-      infos_data << set
+      @infos_data << set
     end
-    binding.pry
 
     info_data = []
-    info[1].map do |y|
+    info[0].map do |y|
       info_data << [y["date"], y["value"].to_f] if y["value"]
     end
     info_data.each do |y|
@@ -44,8 +43,8 @@ class DataController < ApplicationController
     end
 
     @info_hash = {}
-    @info_hash["title"] = info[1][1]["indicator"]["value"]
-    @info_hash["country"] = info[1][1]["country"]["value"]
+    @info_hash["title"] = info[0][1]["indicator"]["value"]
+    @info_hash["country"] = info[0][1]["country"]["value"]
     @info_hash["data"] = info_data
   end
 

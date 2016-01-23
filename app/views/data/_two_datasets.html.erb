@@ -1,0 +1,59 @@
+<script>
+$(function () {
+  $('#container2').highcharts({
+    chart: { type: 'spline' },
+    title: {
+      text: '<%= @infos_data[0]["country"] %>'
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: { year: '%Y' },
+      title: { text: 'Year' }
+    },
+    yAxis: [{
+      title: {
+        text: '<%= @infos_data[0]["title"] %>',
+        style: {
+          color: Highcharts.getOptions().colors[0]
+        }
+      },
+      labels: {
+        style: {
+          color: Highcharts.getOptions().colors[0]
+        }
+      },
+    }, {
+      title: {
+        text: '<%= @infos_data[1]["title"] %>',
+        style: {
+          color: Highcharts.getOptions().colors[1]
+        }
+      },
+      labels: {
+        style: {
+          color: Highcharts.getOptions().colors[1]
+        }
+      },
+      opposite: true
+    }],
+    plotOptions: {
+      spline: {
+        marker: {
+          enabled: true
+        }
+      }
+    },
+    series: [{
+      name: '<%= @infos_data[0]["title"] %>',
+      yAxis: 0,
+      type: "spline",
+      data: <%= @infos_data[0]["data"] %>
+    }, {
+      name: '<%= @infos_data[1]["title"] %>',
+      yAxis: 1,
+      type: "spline",
+      data: <%= @infos_data[1]["data"] %>
+    }]
+  });
+});
+</script>
