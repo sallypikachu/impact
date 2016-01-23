@@ -26,6 +26,8 @@ end
 
 a = JSON.parse(Net::HTTP.get_response(URI("http://apiv3.iucnredlist.org/api/v3/country/list?token=5d6279ab12fcdff4656202461bd97157972fa09db6e3c097e77e58ed4f87a653")).body)
 
+Location.create(country: "World", isocode: "1W")
+
 a["results"].each do |country|
   Location.create(country: country["country"], isocode: country["isocode"])
 end
