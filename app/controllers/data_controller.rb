@@ -12,38 +12,63 @@ class DataController < ApplicationController
   end
 
   def display_data
-    info = []
-    params["title"].each do |title|
-      url = "http://api.worldbank.org/countries/#{params[:country]}/indicators/#{title}?per_page=500&date=1960:2016&format=json"
-      info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
-    end
+    if params["title"].nil?
+      flash["notice"] = "You didn't choose any datasets/countries?!"
+      redirect_to data_path
+    elsif params["title"].count > 1 && params["title"].count <= 3 && params["country"].count == 1
+      info = []
+      params["title"].each do |title|
+        url = "http://api.worldbank.org/countries/#{params[:country][0]}/indicators/#{title}?per_page=500&date=1960:2016&format=json"
+        info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+      end
 
-    @infos_data = []
-    info.each do |dataset|
-      set = {}
+      @infos_data = []
+      info.each do |dataset|
+        set = {}
+        data = []
+        dataset.map do |datum|
+          data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i*1000, datum["value"].to_f] if datum["value"]
+        end
+        set["title"] = dataset[1]["indicator"]["value"]
+        set["country"] = dataset[1]["country"]["value"]
+        set["data"] = data
+        @infos_data << set
+      end
+      binding.pry
+    elsif params["title"].count == 1 && params["country"].count > 1
+      info = []
+      @no_info = []
+      params["country"].each do |country|
+        url = "http://api.worldbank.org/countries/#{country}/indicators/#{params["title"][0]}?per_page=500&date=1960:2016&format=json"
+        output = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+        if output.nil?
+          @no_info << Location.find_by(isocode: country).country
+        else
+        info << output
+        end
+      end
+
+      @infos_data = {}
+      @infos_data["title"] = info[0][0]["indicator"]["value"]
       data = []
-      dataset.map do |datum|
-        data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i*1000, datum["value"].to_f] if datum["value"]
+      info.each do |dataset|
+        country_data = {}
+        unless dataset.nil?
+          country_data["country"] = dataset[0]["country"]["value"]
+          set = []
+          dataset.map do |datum|
+            set << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i*1000, datum["value"].to_f] if datum["value"]
+          end
+          country_data["data"] = set
+          data << country_data
+        end
       end
-      set["title"] = dataset[1]["indicator"]["value"]
-      set["country"] = dataset[1]["country"]["value"]
-      set["data"] = data
-      @infos_data << set
+      @infos_data["data"] = data
+      # flash["notice"] = "Not implemented yet!"
+      # redirect_to data_path
+    else
+      flash["notice"] = "Whoopsy?!"
+      redirect_to data_path
     end
-
-    info_data = []
-    info[0].map do |y|
-      info_data << [y["date"], y["value"].to_f] if y["value"]
-    end
-    info_data.each do |y|
-      if y[1]
-        y[0] = DateTime.parse("#{y[0]}-01-01 00:00:00").to_i*1000
-      end
-    end
-
-    @info_hash = {}
-    @info_hash["title"] = info[0][1]["indicator"]["value"]
-    @info_hash["country"] = info[0][1]["country"]["value"]
-    @info_hash["data"] = info_data
   end
 end

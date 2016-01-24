@@ -1,0 +1,33 @@
+<script>
+$(function () {
+  $('#container1').highcharts({
+    chart: { type: 'spline' },
+    title: {
+      text: '<%= @infos_data[0]["title"] %> of <%= @infos_data[0]["country"] %>'
+    },
+    xAxis: {
+      type: 'datetime',
+      dateTimeLabelFormats: { year: '%Y' },
+      title: { text: 'Year' }
+    },
+    yAxis: {
+      title: { text: '<%= @infos_data[0]["title"] %>' }
+    },
+    tooltip: {
+      headerFormat: '<b>{series.name}</b><br>',
+      pointFormat: '{point.x:%Y}: {point.y:.1f}'
+    },
+    plotOptions: {
+      spline: {
+        marker: {
+          enabled: true
+        }
+      }
+    },
+    series: [{
+      name: '<%= @infos_data[0]["title"] %>',
+      data: <%= @infos_data[0]["data"] %>
+    }]
+  });
+});
+</script>

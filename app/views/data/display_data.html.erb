@@ -1,16 +1,31 @@
-<button type="button" class="button text-center"> <%= link_to "Choose your own data", data_path %></button>
-<hr>
-<div id="container" style="width:100%; height:400px;"></div>
-<% if @infos_data.count == 2 %>
-  <div id="container2" style="width:100%; height:400px;"></div>
-  <%= render "data/two_datasets" %>
-<% end %>
+<div class="columns">
+  <div class="text-center">
+    <button type="button" class="button"> <%= link_to "Choose your own data", data_path %></button>
+  </div>
+
+  <hr>
+
+  <% if @infos_data.class == Hash && @infos_data.count == 2%>
+    <div id="container" style="width:100%; height:400px;"></div>
+    <% if @no_info %>
+    <p>There are no information on the following countries: <%= @no_info.join(", ") %></p>
+    <% end %>
+  <% elsif @infos_data.count == 1 %>
+    <div id="container1" style="width:100%; height:400px;"></div>
+    <%= render "data/one_dataset" %>
+  <% elsif @infos_data.count == 2 %>
+    <div id="container2" style="width:100%; height:400px;"></div>
+    <%= render "data/two_datasets" %>
+  <% end %>
+
+</div>
+
 <script>
 $(function () {
   $('#container').highcharts({
     chart: { type: 'spline' },
     title: {
-      text: '<%= @info_hash["title"] %> of <%= @info_hash["country"] %>'
+      text: '<%= @infos_data["title"] %> %>'
     },
     xAxis: {
       type: 'datetime',
@@ -18,7 +33,7 @@ $(function () {
       title: { text: 'Year' }
     },
     yAxis: {
-      title: { text: '<%= @info_hash["title"] %>' }
+      title: { text: '<%= @infos_data["title"] %>' }
     },
     tooltip: {
       headerFormat: '<b>{series.name}</b><br>',
@@ -31,10 +46,14 @@ $(function () {
         }
       }
     },
-    series: [{
-      name: '<%= @info_hash["title"] %>',
-      data: <%= @info_hash["data"] %>
-    }]
+    series: [
+      <% @infos_data["data"].each do |data| %>
+      {
+        name: '<%= data["country"] %>',
+        data: <%= data["data"] %>
+      },
+      <% end %>
+    ]
   });
 });
 </script>
