@@ -27,14 +27,13 @@ class DataController < ApplicationController
         set = {}
         data = []
         dataset.map do |datum|
-          data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i*1000, datum["value"].to_f] if datum["value"]
+          data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i * 1000, datum["value"].to_f] if datum["value"]
         end
         set["title"] = dataset[1]["indicator"]["value"]
         set["country"] = dataset[1]["country"]["value"]
         set["data"] = data
         @infos_data << set
       end
-      binding.pry
     elsif params["title"].count == 1 && params["country"].count > 1
       info = []
       @no_info = []
@@ -44,7 +43,7 @@ class DataController < ApplicationController
         if output.nil?
           @no_info << Location.find_by(isocode: country).country
         else
-        info << output
+          info << output
         end
       end
 
@@ -57,15 +56,13 @@ class DataController < ApplicationController
           country_data["country"] = dataset[0]["country"]["value"]
           set = []
           dataset.map do |datum|
-            set << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i*1000, datum["value"].to_f] if datum["value"]
+            set << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i * 1000, datum["value"].to_f] if datum["value"]
           end
           country_data["data"] = set
           data << country_data
         end
       end
       @infos_data["data"] = data
-      # flash["notice"] = "Not implemented yet!"
-      # redirect_to data_path
     else
       flash["notice"] = "Whoopsy?!"
       redirect_to data_path
