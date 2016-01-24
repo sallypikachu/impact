@@ -1,6 +1,11 @@
-<div id="container" style="width:100%; height:400px;"></div>
-<hr>
-<button type="button" class="button text-center"> <%= link_to "Choose your own data", data_path %></button>
+<div class="text-center curious">
+  <h1>Let's learn more about the world</h1>
+<button type="button" class="button text-center"> <%= link_to "Lets go!", data_path %></button>
+</div>
+
+<div class="columns">
+<div class="chart" id="container" style="width:100%; height:400px;"></div>
+</div>
 
 <script>
 $(function() {
@@ -37,6 +42,10 @@ $(function() {
       spline: {
         marker: { enabled: true }
       }
+    },
+    tooltip: {
+      headerFormat: '<b>{series.name}</b><br>',
+      pointFormat: '{point.x: %Y}:  {point.y: .1f}'
     },
     series: [{
       name: '<%= @bio_hash["title"] %>',

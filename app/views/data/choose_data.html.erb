@@ -1,21 +1,24 @@
 <div class="column">
   <div class="small-12 medium-10 medium-centered large-8 large-centered columns">
-    <h1>Choose your data</h1>
+    <div class="text-center">
+      <h1>What would you like to compare?</h1>
+      <p>Choose 1-3 different data sets for 1 country or 1 data set and multiple countries.</p>
+    </div>
 
     <%= form_tag do %>
 
       <div class="field">
         <%= label_tag(:title, "Data sets") %>
-        <%= select_tag(:title, options_for_select(@titles), {multiple: true, size: 2} ) %>
+        <%= select_tag(:title, options_for_select(@titles), {multiple: true, size: 5, required: true} ) %>
       </div>
 
 
       <div class="field">
         <%= label_tag(:country, "Countries") %>
-        <%= select_tag(:country, options_for_select(@locations)) %>
+        <%= select_tag(:country, options_for_select(@locations), {multiple: true, size: 5, required: true}) %>
       </div>
 
-      <div class="actions">
+      <div class="actions submit">
         <%= submit_tag ("Display data") %>
       </div>
     <% end %>

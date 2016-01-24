@@ -43,6 +43,10 @@ $(function () {
         }
       }
     },
+    tooltip: {
+      headerFormat: '<b>{series.name}</b><br>',
+      pointFormat: '{point.x: %Y}:  {point.y: .1f}'
+    },
     series: [{
       name: '<%= @infos_data[0]["title"] %>',
       yAxis: 0,
