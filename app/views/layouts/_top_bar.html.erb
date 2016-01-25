@@ -1,18 +1,18 @@
-<div class="top-bar">
+<div class="top-bar" id="gradient">
   <div class="top-bar-left">
-  <ul class="menu" data-dropdown-menu>
-    <li class="menu-text"><%= link_to "Impact", root_path %></li>
-  </ul>
+    <ul class="menu" data-dropdown-menu>
+      <li class="menu-text"><%= link_to "Impact", root_path %></li>
+    </ul>
   </div>
   <div class="top-bar-right">
-  <ul class="menu">
-    <% if user_signed_in? %>
-      <li><%= link_to "Profile", "/users/#{current_user.id}" %></li>
-      <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
-    <% else %>
-      <li id="sign-in"><%= link_to "Sign In", new_user_session_path %></li>
-    <% end %>
-  </ul>
-  </ul>
+    <ul class="menu">
+      <% if user_signed_in? %>
+        <li><%= link_to "Profile", "/users/#{current_user.id}" %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
+      <% else %>
+        <li id="sign-in"><%= link_to "Sign In", new_user_session_path %></li>
+      <% end %>
+    </ul>
   </div>
-  </div>
+</div>
+<div class="border"></div>
