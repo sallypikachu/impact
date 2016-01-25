@@ -33,4 +33,15 @@ feature "sees profile in top bar" do
     expect(page).to have_content("Choose your own data")
     # Not sure on how to test for appearance of highcharts
   end
+
+  scenario "user chooses countries that don't have data" do
+    visit data_path
+    select "Energy use (kg of oil equivalent per capita)", from: "title"
+    select "Aruba", from: "country"
+    select "Anguilla", from: "country"
+    click_on "Display data"
+
+    expect(page).to have_content("There are no information on the following countries: Anguilla")
+    # Not sure on how to test for appearance of highcharts
+  end
 end

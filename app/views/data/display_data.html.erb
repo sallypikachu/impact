@@ -8,7 +8,7 @@
     <% if @infos_data.class == Hash && @infos_data.count == 2%>
       <div id="container" style="width:100%; height:400px;"></div>
       <%= render "data/multi_countries" %>
-      <% if @no_info.empty? %>
+      <% unless @no_info.empty? %>
       <p>There are no information on the following countries: <%= @no_info.join(", ") %></p>
       <% end %>
     <% elsif @infos_data.count == 1 %>
@@ -17,6 +17,9 @@
     <% elsif @infos_data.count == 2 %>
       <div id="container2" style="width:100%; height:400px;"></div>
       <%= render "data/two_datasets" %>
+      <% elsif @infos_data.count == 3 %>
+      <div id="container3" style="width:100%; height:400px;"></div>
+      <%= render "data/three_datasets" %>
     <% end %>
   </div>
 </div>
