@@ -25,13 +25,12 @@ feature "sees profile in top bar" do
   end
 
   scenario "user visits choose data page" do
-    visit root_path
-    click_link "Lets go!"
-    select "Algeria", from: "country"
+    visit data_path
     select "Population density (people per sq. km of land area)", from: "title"
+    select "Algeria", from: "country"
     click_on "Display data"
 
-    expect(page).to have_content("Population density (people per sq. km of land area)")
-    expect(page).to have_content("Brazil")
+    expect(page).to have_content("Choose your own data")
+    # Not sure on how to test for appearance of highcharts
   end
 end
