@@ -1,13 +1,13 @@
 #gradient {
-  background: red; /* For browsers that do not support gradients */
+  background:  #007eee; /* For browsers that do not support gradients */
   /* For Safari 5.1 to 6.0 */
-  background: -webkit-linear-gradient(left, #007EEE, #0095F3, #007FED);
+  background: -webkit-linear-gradient(left, #007eee, #0095f3, #007fed);
   /* For Opera 11.1 to 12.0 */
-  background: -o-linear-gradient(left, #007EEE, #0095F3, #007FED);
+  background: -o-linear-gradient(left, #007eee, #0095f3, #007fed);
   /* For Fx 3.6 to 15 */
-  background: -moz-linear-gradient(left, #007EEE, #0095F3, #007FED);
+  background: -moz-linear-gradient(left, #007eee, #0095f3, #007fed);
   /* Standard syntax */
-  background: linear-gradient(to right, #007EEE, #0095F3, #007FED);
+  background: linear-gradient(to right, #007eee, #0095f3, #007fed);
 }
 
 .top-bar a {
@@ -22,9 +22,14 @@
   background-color: rgba(0, 163, 255, .0)
 }
 
+.menu-text {
+  font-size: 1.8rem;
+  padding: 0 1.2rem;
+}
+
 .border {
   height: .2rem;
-  background-color: #69F1FE;
+  background-color: #69f1fe;
 }
 button.button a {
   color: white;

@@ -15,7 +15,7 @@ class DataController < ApplicationController
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
-    elsif params["title"].count > 1 && params["title"].count <= 3 && params["country"].count == 1
+    elsif params["title"].count >= 1 && params["title"].count <= 3 && params["country"].count == 1
       info = []
       params["title"].each do |title|
         url = "http://api.worldbank.org/countries/#{params[:country][0]}/indicators/#{title}?per_page=500&date=1960:2016&format=json"
