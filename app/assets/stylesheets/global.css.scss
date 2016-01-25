@@ -1,5 +1,5 @@
 #gradient {
-  background: red; /* For browsers that do not support gradients */
+  background:  #007EEE; /* For browsers that do not support gradients */
   /* For Safari 5.1 to 6.0 */
   background: -webkit-linear-gradient(left, #007EEE, #0095F3, #007FED);
   /* For Opera 11.1 to 12.0 */
@@ -20,6 +20,11 @@
 
 .top-bar li {
   background-color: rgba(0, 163, 255, .0)
+}
+
+li.menu-text {
+  font-size: 1.8rem;
+  padding: 0rem 1.2rem;
 }
 
 .border {

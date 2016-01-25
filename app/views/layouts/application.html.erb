@@ -9,14 +9,12 @@
     <%= stylesheet_link_tag    "application" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+    <link href='https://fonts.googleapis.com/css?family=Alegreya:700|Alegreya+Sans|Sigmar+One' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-<%= render "layouts/top_bar" %>
-<div class="row">
-  <%= render "layouts/flash" %>
-  <%= yield %>
-</div>
-
+    <%= render "layouts/top_bar" %>
+    <%= render "layouts/flash" %>
+    <%= yield %>
   </body>
 </html>
