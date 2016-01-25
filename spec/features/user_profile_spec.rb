@@ -15,6 +15,7 @@ feature "sees profile in top bar" do
   }
 
   scenario "user visits index page" do
+    skip
     sign_in_as(user)
 
     click_link "Profile"

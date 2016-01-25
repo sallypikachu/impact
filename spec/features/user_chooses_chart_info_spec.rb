@@ -10,7 +10,7 @@ require "rails_helper"
 feature "sees profile in top bar" do
   scenario "user visits choose data page" do
     visit root_path
-    click_link "Lets go!"
+    click_link "Lets Learn"
 
     expect(page).to have_content("What would you like to compare?")
     expect(page).to have_content("Choose 1-3 different data sets for 1 country or 1 data set and multiple countries.")
