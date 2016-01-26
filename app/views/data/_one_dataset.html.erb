@@ -15,16 +15,59 @@ $(function () {
     },
     tooltip: {
       headerFormat: '<b>{series.name}</b><br>',
-      pointFormat: '{point.x:%Y}: {point.y:.1f}'
+      pointFormat: '{point.x:%Y}: {point.y:.1f}',
+      formatter: function() {
+        var s;
+        if (this.point.name) { // the pie chart
+          return false;
+        } else {
+          var d = new Date(this.x);
+          d = d.getFullYear();
+          s = this.series.name + '<br>' + d + ': ' + this.y.toFixed(1);
+        }
+        return s;
+      }
     },
     plotOptions: {
       spline: {
         marker: {
           enabled: true
         }
+      },
+      pie: {
+        allowPointSelect: false,
+        dataLabels: {
+          enabled: false,
+          format: '<b>{point.name}</b><br>{point.y}',
+        }
       }
     },
     series: [{
+      name: 'Endangered',
+      type: 'pie',
+      data: [{
+        name: 'Extinct',
+        y: <%= @threatened[0] %>
+      }, {
+        name: 'Threatened',
+        y: <%= @threatened[1] %>
+      }, {
+        name: 'At Risk',
+        y: <%= @threatened[2] %>
+      }, {
+        name: 'Data Deficient',
+        y: <%= @threatened[3] %>
+      }, {
+        name: 'Least Concerned',
+        y: <%= @threatened[4] %>
+      }],
+      center: ["20%", "10%"],
+      size: 100,
+      showInLegend: false,
+      dataLabels: {
+        enabled: true
+      },
+    }, {
       name: '<%= @infos_data[0]["title"] %>',
       data: <%= @infos_data[0]["data"] %>
     }]

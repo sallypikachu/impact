@@ -16,6 +16,7 @@ class DataController < ApplicationController
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
     elsif params["title"].count >= 1 && params["title"].count <= 3 && params["country"].count == 1
+      @threatened = threatened(params["country"])
       info = []
       params["title"].each do |title|
         url = "http://api.worldbank.org/countries/#{params[:country][0]}/indicators/#{title}?per_page=500&date=1960:2016&format=json"
@@ -35,6 +36,7 @@ class DataController < ApplicationController
         @infos_data << set
       end
     elsif params["title"].count == 1 && params["country"].count > 1
+      @threatened = threatened(params["country"])
       info = []
       @no_info = []
       params["country"].each do |country|
@@ -67,5 +69,28 @@ class DataController < ApplicationController
       flash["notice"] = "Whoopsy?!"
       redirect_to data_path
     end
+  end
+
+  def threatened(country_array)
+    return [1053, 48379, 24143, 32529, 354185] if country_array.include?("1W")
+    extinct = 0
+    threatened = 0
+    lower_risk = 0
+    data_deficient = 0
+    least_concerned = 0
+    country_array.each do |country|
+      url = "http://apiv3.iucnredlist.org/api/v3/country/getspecies/#{country}?token=5d6279ab12fcdff4656202461bd97157972fa09db6e3c097e77e58ed4f87a653"
+      info = JSON.parse(Net::HTTP.get_response(URI(url)).body)
+      info["result"].each do |specie|
+        case specie["category"]
+        when "EX", "EW" then extinct += 1
+        when "CR", "EN", "VU" then threatened += 1
+        when "NT", "LR/nt" then lower_risk += 1
+        when "DD" then data_deficient += 1
+        when "LR/lc", "LC" then least_concerned += 1
+        end
+      end
+    end
+    return [extinct, threatened, lower_risk, data_deficient, least_concerned]
   end
 end

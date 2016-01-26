@@ -29,7 +29,6 @@ feature "sees sign in options" do
   end
 
   scenario "user succesfully signs in" do
-    skip
     sign_in_as(user)
     expect(page).to have_content("Signed in successfully.")
   end

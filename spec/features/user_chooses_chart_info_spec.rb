@@ -42,6 +42,7 @@ feature "sees profile in top bar" do
     click_on "Display data"
 
     expect(page).to have_content("There are no information on the following countries: Anguilla")
+    expect(page).to have_content("* Pie chart depicts total numbers of all the countries")
     # Not sure on how to test for appearance of highcharts
   end
 end
