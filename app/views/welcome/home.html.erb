@@ -38,11 +38,29 @@ $(function() {
     plotOptions: {
       spline: {
         marker: { enabled: true }
+      },
+      pie: {
+        allowPointSelect: false,
+        dataLabels: {
+          enabled: false,
+          format: '<b>{point.name}</b>: {point.y}',
+        }
       }
     },
     tooltip: {
       headerFormat: '<b>{series.name}</b><br>',
-      pointFormat: '{point.x: %Y}:  {point.y: .1f}'
+      pointFormat: '{point.x: %Y}: {point.y: .1f}',
+      formatter: function() {
+        var s;
+        if (this.point.name) { // the pie chart
+          return false;
+        } else {
+          var d = new Date(this.x);
+          d = d.getFullYear();
+          s = this.series.name + '<br>' + d + ': ' + this.y.toFixed(1);
+        }
+        return s;
+      }
     },
     series: [{
       name: '<%= @bio_hash["title"] %>',
@@ -53,6 +71,25 @@ $(function() {
       name: '<%= @energy_hash["title"] %>',
       yAxis: 0,
       data: <%= @energy_hash["data"] %>
+    }, {
+      name: 'Endangered',
+      type: 'pie',
+      data: [{
+        name: 'Extinct',
+        y: 11
+      }, {
+        name: 'Threatened',
+        y: 451
+      }, {
+        name: 'Vulnerable',
+        y: 5249
+      }],
+      center: [100, 80],
+      size: 100,
+      showInLegend: false,
+      dataLabels: {
+        enabled: true
+      },
     }]
   });
 });

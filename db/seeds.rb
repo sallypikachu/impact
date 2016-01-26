@@ -15,7 +15,6 @@ Title.create([
   { value: "AG.LND.FRST.K2", name: "Forest area (sq. km)" },
   { value: "AG.LND.IRIG.AG.ZS", name: "Agricultural irrigated land (% of total agricultural land)" },
   { value: "ER.LND.PTLD.ZS", name: "Terrestrial protected areas (% of total land area)" },
-  { value: "BN.GSR.FCTY.CD", name: "Net primary income (BoP, current US$)" },
   { value: "EG.GDP.PUSE.KO.PP", name: "GDP per unit of energy use (PPP $ per kg of oil equivalent)" },
   { value: "EG.GDP.PUSE.KO.PP.KD", name: "GDP per unit of energy use (constant 2011 PPP $ per kg of oil equivalent)" }
 ])

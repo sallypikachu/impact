@@ -8,6 +8,7 @@
     <% if @infos_data.class == Hash && @infos_data.count == 2%>
       <div id="container" style="width:100%; height:400px;"></div>
       <%= render "data/multi_countries" %>
+      * Pie chart depicts total numbers of all the countries
       <% unless @no_info.empty? %>
       <p>There are no information on the following countries: <%= @no_info.join(", ") %></p>
       <% end %>
