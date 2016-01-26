@@ -12,7 +12,6 @@ class DataController < ApplicationController
   end
 
   def display_data
-
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
