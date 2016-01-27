@@ -12,7 +12,7 @@ class DataController < ApplicationController
   end
 
   def display_data
-    @description = dataset_description(params["title"])
+    @description = dataset_description(params["title"]) unless params["title"].nil?
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
@@ -46,7 +46,6 @@ class DataController < ApplicationController
       @infos_data["title"] = info[0][0]["indicator"]["value"]
       data = []
       info.each do |dataset|
-        binding.pry
         country_data = {}
         unless dataset.nil?
           country_data["country"] = dataset[0]["country"]["value"]
