@@ -1,14 +1,31 @@
-.curious {
-  background: asset-url("curiousity.jpg") no-repeat center center scroll;
-  background-size: cover;
+.columns {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.about {
+  padding: 2rem;
+  background-color: #d5ffea;
+  border-radius: 50px;
 }
 
-.curious h1 {
-  padding: 3rem;
-  color: white;
+.example-chart {
+  background-color: #d5ffea;
+  border-radius: 50px;
+
+  a {
+    color: black;
+    margin-top: 1rem;
+  }
+  a:hover {
+    color: #1585cf;
+  }
 }
 
-.curious button.button {
-  border-radius: 18px;
-  vertical-align: bottom;
+div.module.text-center {
+  border-radius: 50px;
+}
+
+.learn {
+  background-color: #d5ffea;
+  border-radius: 50px;
 }

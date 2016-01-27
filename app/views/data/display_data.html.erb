@@ -1,10 +1,5 @@
 <div class="row">
   <div class="columns">
-    <div class="text-center">
-      <button type="button" class="button"> <%= link_to "Choose your own data", data_path %></button>
-    </div>
-
-    <hr>
     <% if @infos_data.class == Hash && @infos_data.count == 2%>
       <div id="container" style="width:100%; height:400px;"></div>
       <%= render "data/multi_countries" %>
@@ -21,6 +16,15 @@
       <% elsif @infos_data.count == 3 %>
       <div id="container3" style="width:100%; height:400px;"></div>
       <%= render "data/three_datasets" %>
+    <% end %>
+    <div class="container">
+      <% @description.each do |descrip| %>
+      <div class="medium-4 small-12 columns">
+        <div class ="green-container">
+      <h4><%= descrip["title"] %></h4>
+      <p><%= descrip["description"] %></p>
+    </div>
+    </div>
     <% end %>
   </div>
 </div>
