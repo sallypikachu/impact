@@ -1,18 +1,19 @@
-<div class="top-bar" id="gradient">
+<div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+  <button class="menu-icon" type="button" data-toggle></button>
+  <div class="title-bar-title">Menu</div>
+</div>
+
+<div class="top-bar" id="main-menu">
   <div class="top-bar-left">
-    <ul class="menu" data-dropdown-menu>
-      <li class="menu-text"><%= link_to "Impact", root_path %></li>
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text"><%= link_to image_tag("impact-logo.png"), root_path %></li>
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
-      <% if user_signed_in? %>
-        <li><%= link_to "Profile", "/users/#{current_user.id}" %></li>
-        <li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete %></li>
-      <% else %>
-        <li id="sign-in"><%= link_to "Sign In", new_user_session_path %></li>
-      <% end %>
+      <li><%= link_to "Create", data_path %></li>
+      <li><%= link_to "Learn", "#" %></li>
+      <li><%= link_to "Contribute", "#" %></li>
     </ul>
   </div>
 </div>
-<div class="border"></div>

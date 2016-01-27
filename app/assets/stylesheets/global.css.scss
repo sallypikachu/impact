@@ -1,12 +1,28 @@
-.menu-text {
-  font-size: 1.8rem;
-  padding: 0 1.2rem;
+.top-bar {
+  height: 3rem;
 }
 
-.border {
-  height: .2rem;
-  background-color: #69f1fe;
+.menu-text {
+  font-size: 1.8rem;
+  padding: 0;
+
+  img {
+    margin: 0;
+    padding: .2rem;
+    background-color: white;
+    width: 6rem;
+    height: auto;
+  }
 }
+
+li.menu-text {
+  list-style: none;
+}
+
+.menu > li > a > img {
+  margin: 0;
+}
+
 button.button a {
   color: white;
 }

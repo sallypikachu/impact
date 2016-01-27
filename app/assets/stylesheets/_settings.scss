@@ -52,8 +52,7 @@ $secondary-color: #777;
 $success-color: #3adb76;
 $warning-color: #ffae00;
 $alert-color: #ec5840;
-// $light-gray: #e6e6e6;
-$light-gray: #187B22;
+$light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
@@ -542,7 +541,7 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-// $topbar-background: $light-gray;
+$topbar-background: $black;
 // $topbar-link-color: $primary-color;
 $topbar-link-color: white;
 $topbar-input-width: 200px;
