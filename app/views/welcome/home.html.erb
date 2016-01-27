@@ -1,16 +1,14 @@
-<div class="row">
-  <div class="columns">
-    <div class="about text-center small-12 medium-11 medium-centered large-9 large-centered columns">
+<div class="columns">
+  <div class="text-center small-12 medium-11 medium-centered large-10 large-centered columns">
+    <div class="about small-12 columns">
       <h1>About</h1>
-      <p>Created to inspire curiousity about how we, humans, have impacted the world. Click through and select what sets of data you want to compare. Hopefully you will learn something new and it sets you on a path to learn more about countries and its influences.</p>
+      <p>Created to inspire curiousity about how we, humans, have impacted the world. Click through and select what sets of data you want to compare. Hopefully you will learn something new and it sets you on a path to learn more about society, behavior, and the environment.</p>
     </div>
-    <div class="chart small-12 columns">
-      <h1></h1>
-      <div class="chart" id="container" style="width:100%; height:400px;"></div>
-    </div>
-    <div class="contact text-center">
-      <h1>Contact</h1>
-      <p></p>
+    <div class="example-chart small-12 columns">
+      <h1><%= link_to "What you can create", data_path %></h1>
+      <div class="chart">
+  			<div id="container" style="width:100%; height:400px;"></div>
+      </div>
     </div>
   </div>
 </div>
@@ -20,7 +18,7 @@ $(function() {
   $('#container').highcharts({
     chart: { type: 'spline' },
     title: {
-      text: '<%= @energy_hash["title"]%> vs <%= @bio_hash["title"] %> of <%= @energy_hash["country"] %>',
+      text: '<%= @energy_hash["title"]%> vs <%= @bio_hash["title"] %> of the <%= @energy_hash["country"] %>',
     },
     xAxis: {
       type: 'datetime',
@@ -54,7 +52,7 @@ $(function() {
         allowPointSelect: false,
         dataLabels: {
           enabled: false,
-          format: '<b>{point.name}</b>: {point.y}',
+          format: '<b>{point.name}</b><br>{point.y}',
         }
       }
     },
@@ -74,6 +72,31 @@ $(function() {
       }
     },
     series: [{
+      name: 'Endangered',
+      type: 'pie',
+      data: [{
+        name: 'Extinct',
+        y: <%= @threatened[0] %>
+      }, {
+        name: 'Threatened',
+        y: <%= @threatened[1] %>
+      }, {
+        name: 'At Risk',
+        y: <%= @threatened[2] %>
+      }, {
+        name: 'Data Deficient',
+        y: <%= @threatened[3] %>
+      }, {
+        name: 'Least Concerned',
+        y: <%= @threatened[4] %>
+      }],
+      center: ["20%", "18%"],
+      size: "20%",
+      showInLegend: false,
+      dataLabels: {
+        enabled: true
+      },
+    }, {
       name: '<%= @bio_hash["title"] %>',
       yAxis: 1,
       type: "spline",
@@ -82,25 +105,6 @@ $(function() {
       name: '<%= @energy_hash["title"] %>',
       yAxis: 0,
       data: <%= @energy_hash["data"] %>
-    }, {
-      name: 'Endangered',
-      type: 'pie',
-      data: [{
-        name: 'Extinct',
-        y: 11
-      }, {
-        name: 'Threatened',
-        y: 451
-      }, {
-        name: 'Vulnerable',
-        y: 5249
-      }],
-      center: [100, 80],
-      size: 100,
-      showInLegend: false,
-      dataLabels: {
-        enabled: true
-      },
     }]
   });
 });

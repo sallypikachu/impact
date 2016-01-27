@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def home
-    url = "http://api.worldbank.org/countries/BR/indicators/EG.USE.PCAP.KG.OE?per_page=500&date=1960:2016&format=json"
+    url = "http://api.worldbank.org/countries/1W/indicators/EG.USE.PCAP.KG.OE?per_page=500&date=1960:2016&format=json"
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
 
@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
     @energy_hash["country"] = @info[1][1]["country"]["value"]
     @energy_hash["data"] = @energy_data
 
-    url = "http://api.worldbank.org/countries/BR/indicators/AG.LND.FRST.ZS?per_page=500&date=1960:2016&format=json"
+    url = "http://api.worldbank.org/countries/1W/indicators/AG.LND.FRST.ZS?per_page=500&date=1960:2016&format=json"
     info = Net::HTTP.get_response(URI(url)).body
     @info = JSON.parse(info)
 
@@ -32,5 +32,7 @@ class WelcomeController < ApplicationController
     @bio_hash = {}
     @bio_hash["title"] = @info[1][1]["indicator"]["value"]
     @bio_hash["data"] = @bio_data
+
+    @threatened = [1053, 48379, 24143, 32529, 354185]
   end
 end

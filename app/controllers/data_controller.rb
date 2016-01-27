@@ -17,11 +17,7 @@ class DataController < ApplicationController
       redirect_to data_path
     elsif params["title"].count >= 1 && params["title"].count <= 3 && params["country"].count == 1
       @threatened = threatened(params["country"])
-      info = []
-      params["title"].each do |title|
-        url = "http://api.worldbank.org/countries/#{params[:country][0]}/indicators/#{title}?per_page=500&date=1960:2016&format=json"
-        info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
-      end
+      info = world_bank_info(params["country"], params["title"])
 
       @infos_data = []
       info.each do |dataset|
@@ -37,15 +33,13 @@ class DataController < ApplicationController
       end
     elsif params["title"].count == 1 && params["country"].count > 1
       @threatened = threatened(params["country"])
-      info = []
+      info = world_bank_info(params["country"], params["title"])
       @no_info = []
       params["country"].each do |country|
         url = "http://api.worldbank.org/countries/#{country}/indicators/#{params["title"][0]}?per_page=500&date=1960:2016&format=json"
         output = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
         if output.nil?
           @no_info << Location.find_by(isocode: country).country
-        else
-          info << output
         end
       end
 
@@ -92,5 +86,16 @@ class DataController < ApplicationController
       end
     end
     return [extinct, threatened, lower_risk, data_deficient, least_concerned]
+  end
+
+  def world_bank_info(country_array, dataset_array)
+    info = []
+    dataset_array.each do |dataset|
+      country_array.each do |country|
+        url = "http://api.worldbank.org/countries/#{country}/indicators/#{dataset}?per_page=500&date=1960:2016&format=json"
+        info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+      end
+    end
+    info
   end
 end

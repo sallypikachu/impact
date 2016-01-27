@@ -1,27 +1,3 @@
-#gradient {
-  background:  #007eee; /* For browsers that do not support gradients */
-  /* For Safari 5.1 to 6.0 */
-  background: -webkit-linear-gradient(left, #007eee, #0095f3, #007fed);
-  /* For Opera 11.1 to 12.0 */
-  background: -o-linear-gradient(left, #007eee, #0095f3, #007fed);
-  /* For Fx 3.6 to 15 */
-  background: -moz-linear-gradient(left, #007eee, #0095f3, #007fed);
-  /* Standard syntax */
-  background: linear-gradient(to right, #007eee, #0095f3, #007fed);
-}
-
-.top-bar a {
-  background-color: rgba(0, 163, 255, .0)
-}
-
-.top-bar ul {
-  background-color: rgba(0, 163, 255, .0)
-}
-
-.top-bar li {
-  background-color: rgba(0, 163, 255, .0)
-}
-
 .menu-text {
   font-size: 1.8rem;
   padding: 0 1.2rem;
@@ -36,7 +12,7 @@ button.button a {
 }
 
 .chart {
-  margin: 3rem 0rem;
+  margin: 1rem;
 }
 
 .text-center button {
@@ -52,6 +28,7 @@ button.button a {
   border-style: none;
   color: white;
   border-radius: 18px;
+  margin-bottom: 1rem;
 }
 
 .header {
