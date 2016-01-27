@@ -12,13 +12,13 @@ class DataController < ApplicationController
   end
 
   def display_data
+    @description = dataset_description(params["title"])
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
     elsif params["title"].count >= 1 && params["title"].count <= 3 && params["country"].count == 1
       @threatened = threatened(params["country"])
       info = world_bank_info(params["country"], params["title"])
-
       @infos_data = []
       info.each do |dataset|
         set = {}
@@ -36,17 +36,17 @@ class DataController < ApplicationController
       info = world_bank_info(params["country"], params["title"])
       @no_info = []
       params["country"].each do |country|
-        url = "http://api.worldbank.org/countries/#{country}/indicators/#{params["title"][0]}?per_page=500&date=1960:2016&format=json"
+        url = "http://api.worldbank.org/countries/#{country}/indicators/#{params["title"][0]}?date=1960:2016&format=json"
         output = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
         if output.nil?
           @no_info << Location.find_by(isocode: country).country
         end
       end
-
       @infos_data = {}
       @infos_data["title"] = info[0][0]["indicator"]["value"]
       data = []
       info.each do |dataset|
+        binding.pry
         country_data = {}
         unless dataset.nil?
           country_data["country"] = dataset[0]["country"]["value"]
@@ -63,6 +63,15 @@ class DataController < ApplicationController
       flash["notice"] = "Whoopsy?!"
       redirect_to data_path
     end
+  end
+  def dataset_description(indicator_array)
+    description = []
+    indicator_array.each do |dataset|
+    url = "http://api.worldbank.org/indicators/#{dataset}?format=json"
+    info = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+    description << {"title" => info[0]["name"], "description" =>info[0]["sourceNote"]}
+    end
+    description
   end
 
   def threatened(country_array)
@@ -93,7 +102,8 @@ class DataController < ApplicationController
     dataset_array.each do |dataset|
       country_array.each do |country|
         url = "http://api.worldbank.org/countries/#{country}/indicators/#{dataset}?per_page=500&date=1960:2016&format=json"
-        info << JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+        temp = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
+        info << temp unless temp.nil?
       end
     end
     info
