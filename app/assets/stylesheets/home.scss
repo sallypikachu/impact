@@ -3,14 +3,13 @@
   margin-bottom: 1rem;
 }
 .about {
-  padding: 2rem;
   background-color: #d5ffea;
-  border-radius: 50px;
+  padding: 1rem;
 }
 
 .example-chart {
-  background-color: #d5ffea;
-  border-radius: 50px;
+  background-color: #f3f3f3;
+  padding: 1rem;
 
   a {
     color: black;
@@ -21,11 +20,25 @@
   }
 }
 
-div.module.text-center {
-  border-radius: 50px;
+.pie-size {
+  background: asset-url("path.jpg") no-repeat center center;
+  height: 300px;
+  position: relative;
 }
 
-.learn {
-  background-color: #d5ffea;
-  border-radius: 50px;
+.vertical-center {
+  position: absolute;
+  top: 25%;
+
+  input {
+    background-color: rgba(0,0,0, 0.18);
+    border-style: none;
+    color: white;
+    font-size: 2rem;
+    padding: 5rem;
+  }
+
+  input:hover {
+    color: #abe6ff;
+  }
 }
