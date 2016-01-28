@@ -27,7 +27,7 @@ feature "sees profile in top bar" do
   scenario "user visits choose data page" do
     visit data_path
     select "Population density (people per sq. km of land area)", from: "title"
-    select "Algeria", from: "country"
+    select "Canada", from: "country"
     click_on "Display data"
 
     expect(page).to have_content("Population density (people per sq. km of land area)")
@@ -37,7 +37,7 @@ feature "sees profile in top bar" do
   scenario "user chooses countries that don't have data" do
     visit data_path
     select "Energy use (kg of oil equivalent per capita)", from: "title"
-    select "Aruba", from: "country"
+    select "Canada", from: "country"
     select "Anguilla", from: "country"
     click_on "Display data"
 
