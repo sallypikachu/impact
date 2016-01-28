@@ -3,12 +3,12 @@
   margin-bottom: 1rem;
 }
 .about {
-  padding: 1rem;
   background-color: #d5ffea;
+  padding: 1rem;
 }
 
 .example-chart {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   padding: 1rem;
 
   a {
@@ -21,9 +21,9 @@
 }
 
 .pie-size {
-  position: relative;
-  height: 300px;
   background: asset-url("path.jpg") no-repeat center center;
+  height: 300px;
+  position: relative;
 }
 
 .vertical-center {
@@ -31,11 +31,11 @@
   top: 25%;
 
   input {
+    background-color: rgba(0,0,0, 0.18);
     border-style: none;
-    background-color: rgba(0,0,0, .18);
-    padding: 5rem;
-    font-size: 2rem;
     color: white;
+    font-size: 2rem;
+    padding: 5rem;
   }
 
   input:hover {
