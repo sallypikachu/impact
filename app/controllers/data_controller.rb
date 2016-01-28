@@ -81,7 +81,7 @@ class DataController < ApplicationController
     data_deficient = 0
     least_concerned = 0
     country_array.each do |country|
-      url = "http://apiv3.iucnredlist.org/api/v3/country/getspecies/#{country}?token=5d6279ab12fcdff4656202461bd97157972fa09db6e3c097e77e58ed4f87a653"
+      url = "http://apiv3.iucnredlist.org/api/v3/country/getspecies/#{country}?token=#{ENV['IUCN_TOKEN']}"
       info = JSON.parse(Net::HTTP.get_response(URI(url)).body)
       info["result"].each do |specie|
         case specie["category"]
