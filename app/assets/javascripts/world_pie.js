@@ -19,9 +19,9 @@ $(function () {
           allowPointSelect: true,
           cursor: 'pointer',
           dataLabels: {
-            enabled: false
-          },
-          showInLegend: true
+            enabled: true,
+            format: '{point.y} organisms',
+          }
         }
       },
       series: [{
