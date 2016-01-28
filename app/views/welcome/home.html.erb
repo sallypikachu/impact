@@ -1,17 +1,32 @@
 <div class="columns">
   <div class="text-center small-12 medium-11 medium-centered large-10 large-centered columns">
-    <div class="about small-5 small-centered columns">
-      <h1>About</h1>
-      <p>Created to inspire curiousity about how we, humans, have impacted the world. Click through and select what sets of data you want to compare. Hopefully you will learn something new and it sets you on a path to learn more about society, behavior, and the environment.</p>
+    <div class="about small-12 columns">
+      <div class="small-12 large-5 columns">
+        <h1>About</h1>
+        <p>Created to inspire curiousity about how we, humans, have impacted the world. Click through and select what sets of data you want to compare. Hopefully you will learn something new and it sets you on a path to learn more about society, behavior, and the environment.</p>
+      </div>
+      <div class="large-7 small-12 columns">
+        <div class="small-12 large-6 columns">
+          <%= image_tag("water.jpg") %>
+        </div>
+          <div class="small-12 large-6 columns">
+        <%= image_tag("food.jpg") %>
+      </div>
+      </div>
     </div>
     <div class="example-chart small-12 columns">
       <h1><%= link_to "What you can create", data_path %></h1>
-      <div class="chart">
+      <div class="small-12 large-7 columns">
+        <div id="world_pie" style="width:100%; height:300px;"></div>
+      </div>
+      <div class="small-12 large-5 columns pie-size">
+        <div class="small-12 vertical-center">
+          <%= button_to "Get started", data_path %>
+        </div>
+      </div>
+      <div class="small-12 columns">
   			<div id="container" style="width:100%; height:300px;"></div>
       </div>
-    </div>
-    <div class="about small-7 columns">
-      <div id="world_pie" style="width:100%; height:300px;"></div>
     </div>
   </div>
 </div>

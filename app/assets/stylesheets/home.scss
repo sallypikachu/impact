@@ -3,14 +3,13 @@
   margin-bottom: 1rem;
 }
 .about {
-  padding: 2rem;
+  padding: 1rem;
   background-color: #d5ffea;
-  border-radius: 50px;
 }
 
 .example-chart {
-  background-color: #d5ffea;
-  border-radius: 50px;
+  background-color: #a2e3ff;
+  padding: 1rem;
 
   a {
     color: black;
@@ -21,11 +20,25 @@
   }
 }
 
-div.module.text-center {
-  border-radius: 50px;
+.pie-size {
+  position: relative;
+  height: 300px;
+  background: asset-url("energy.jpg") no-repeat center center;
 }
 
-.learn {
-  background-color: #d5ffea;
-  border-radius: 50px;
+.vertical-center {
+  position: absolute;
+  top: 25%;
+
+  input {
+    border-style: none;
+    background-color: rgba(0,0,0, .0);
+    padding: 4rem;
+    font-size: 2rem;
+    color: white;
+  }
+
+  input:hover {
+    color: #a2e3ff;
+  }
 }
