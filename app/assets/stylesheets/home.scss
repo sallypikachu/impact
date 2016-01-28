@@ -8,7 +8,7 @@
 }
 
 .example-chart {
-  background-color: #a2e3ff;
+  background-color: #F3F3F3;
   padding: 1rem;
 
   a {
@@ -23,7 +23,7 @@
 .pie-size {
   position: relative;
   height: 300px;
-  background: asset-url("energy.jpg") no-repeat center center;
+  background: asset-url("path.jpg") no-repeat center center;
 }
 
 .vertical-center {
@@ -32,13 +32,13 @@
 
   input {
     border-style: none;
-    background-color: rgba(0,0,0, .0);
-    padding: 4rem;
+    background-color: rgba(0,0,0, .18);
+    padding: 5rem;
     font-size: 2rem;
     color: white;
   }
 
   input:hover {
-    color: #a2e3ff;
+    color: #abe6ff;
   }
 }
