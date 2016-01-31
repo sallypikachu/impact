@@ -63,6 +63,10 @@ class DataController < ApplicationController
       redirect_to data_path
     end
   end
+
+  def learn
+  end
+
   def dataset_description(indicator_array)
     description = []
     indicator_array.each do |dataset|
