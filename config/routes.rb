@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :users, only: :show
   get "/data", to: "data#choose_data"
   post "/data", to: "data#display_data"
+  get "/learn", to: "data#learn"
+  get "/action", to: "data#action"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
