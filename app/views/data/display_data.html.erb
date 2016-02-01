@@ -1,9 +1,8 @@
 <div class="row">
   <div class="columns">
-    <% if @infos_data.class == Hash && @infos_data.count == 2%>
+    <% if @infos_data.class == Hash && @infos_data.count == 2 %>
       <div id="container" style="width:100%; height:400px;"></div>
       <%= render "data/multi_countries" %>
-      * Pie chart depicts total numbers of all the countries
       <% unless @no_info.empty? %>
       <p>There are no information on the following countries: <%= @no_info.join(", ") %></p>
       <% end %>
@@ -28,5 +27,19 @@
       </div>
     <% end %>
     </div>
+    <% unless @threatened.nil? %>
+    <div class="small-12 medium-6 columns">
+      <div class="small-6 medium-6 columns"
+        <div id="pie" style="width:100%; height:400px;"></div>
+      </div>
+    <div class="small-12 medium-6 columns">
+      <div class="green-container">
+        <h4>Endangered Organisms</h4>
+        <p>Extinct encompanies animals that are extinct and extinct in the wild.<br>Threatened encompanies all that are critically endangered, endangered, and vulnerable.<br>At Risk encompanies all taht are lower risk, conservation dependent, and near threatned.<br>Data Deficient encompanies all that are data deficient.<br>Least concerned all that are least concerned.</p>
+      </div>
+      </div>
+    </div>
+    <%= render "data/pie" %>
+    <% end %>
   </div>
 </div>

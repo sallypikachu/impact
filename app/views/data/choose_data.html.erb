@@ -18,6 +18,11 @@
         <%= select_tag(:country, options_for_select(@locations), {multiple: true, size: 5, required: true}) %>
       </div>
 
+      <div class="field">
+        <%= label_tag(:pie, "Include data on number of endangered animals?") %>
+        <%= check_box_tag(:pie) %>
+      </div>
+
       <div class="actions submit">
         <%= submit_tag ("Display data") %>
       </div>

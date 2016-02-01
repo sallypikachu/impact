@@ -31,7 +31,6 @@ feature "sees profile in top bar" do
     click_on "Display data"
 
     expect(page).to have_content("Population density (people per sq. km of land area)")
-    # Not sure on how to test for appearance of highcharts
   end
 
   scenario "user chooses countries that don't have data" do
@@ -42,7 +41,16 @@ feature "sees profile in top bar" do
     click_on "Display data"
 
     expect(page).to have_content("There are no information on the following countries: Anguilla")
-    expect(page).to have_content("* Pie chart depicts total numbers of all the countries")
-    # Not sure on how to test for appearance of highcharts
+  end
+
+  scenario "user chooses IUCN dataset" do
+    visit data_path
+    select "Energy use (kg of oil equivalent per capita)", from: "title"
+    check "Include data on number of endangered animals?"
+    select "World", from: "country"
+    click_on "Display data"
+
+    expect(page).to have_content("Endangered Organisms")
+    expect(page).to have_content("Extinct encompanies animals that are extinct")
   end
 end

@@ -10,22 +10,9 @@ require "rails_helper"
 
 feature "visit home page to see tables/charts/maps" do
   scenario "visit home page to see the biodiversity map" do
-    skip
-    biodiversity = Title.create(name: "GEF benefits index for biodiversity")
-    year2008 = Year.create(year: 2008)
-    brazil = Location.create(country: "Brazil", isocode: "BR")
-    japan = Location.create(country: "Japan", isocode: "JP")
+    visit root_path
 
-    Fact.create([
-      { title: biodiversity, year: year2008, location: brazil, data: "100.0" },
-      { title: biodiversity, year: year2008, location: japan, data: "36.0" }
-    ])
-    visit facts_path
-
-    expect(page).to have_content("EF benefits index for biodiversity")
-    expect(page).to have_content("Brazil")
-    expect(page).to have_content("100.0")
-    expect(page).to have_content("Japan")
-    expect(page).to have_content("36.0")
+    expect(page).to have_content("About")
+    expect(page).to have_content("Created to inspire curiousity")
   end
 end
