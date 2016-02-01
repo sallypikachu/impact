@@ -19,18 +19,7 @@ class DataController < ApplicationController
       redirect_to data_path
     elsif params["title"].count >= 1 && params["title"].count <= 3 && params["country"].count == 1
       info = world_bank_info(params["country"], params["title"])
-      @infos_data = []
-      info.each do |dataset|
-        set = {}
-        data = []
-        dataset.map do |datum|
-          data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i * 1000, datum["value"].to_f] if datum["value"]
-        end
-        set["title"] = dataset[1]["indicator"]["value"]
-        set["country"] = dataset[1]["country"]["value"]
-        set["data"] = data
-        @infos_data << set
-      end
+      @infos_data = multi_dataset_info(info)
     elsif params["title"].count == 1 && params["country"].count > 1
       info = world_bank_info(params["country"], params["title"])
       @no_info = []
@@ -41,22 +30,7 @@ class DataController < ApplicationController
           @no_info << Location.find_by(isocode: country).country
         end
       end
-      @infos_data = {}
-      @infos_data["title"] = info[0][0]["indicator"]["value"]
-      data = []
-      info.each do |dataset|
-        country_data = {}
-        unless dataset.nil?
-          country_data["country"] = dataset[0]["country"]["value"]
-          set = []
-          dataset.map do |datum|
-            set << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i * 1000, datum["value"].to_f] if datum["value"]
-          end
-          country_data["data"] = set
-          data << country_data
-        end
-      end
-      @infos_data["data"] = data
+      @infos_data = multi_countries_info(info)
     else
       flash["notice"] = "Whoopsy?!"
       redirect_to data_path
@@ -64,6 +38,10 @@ class DataController < ApplicationController
   end
 
   def learn
+    info = world_bank_info(["AM"], ["SP.POP.TOTL", "EG.USE.PCAP.KG.OE"])
+    @infos_data = multi_dataset_info(info)
+    info = world_bank_info(["IS", "US"], ["EG.USE.PCAP.KG.OE"])
+    @energy = multi_countries_info(info)
   end
 
   def dataset_description(indicator_array)
@@ -109,5 +87,41 @@ class DataController < ApplicationController
       end
     end
     info
+  end
+
+  def multi_dataset_info(array)
+    infos_data = []
+    array.each do |dataset|
+      set = {}
+      data = []
+      dataset.map do |datum|
+        data << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i * 1000, datum["value"].to_f] if datum["value"]
+      end
+      set["title"] = dataset[1]["indicator"]["value"]
+      set["country"] = dataset[1]["country"]["value"]
+      set["data"] = data
+      infos_data << set
+    end
+    infos_data
+  end
+
+  def multi_countries_info(array)
+    infos_data = {}
+    infos_data["title"] = array[0][0]["indicator"]["value"]
+    data = []
+    array.each do |dataset|
+      country_data = {}
+      unless dataset.nil?
+        country_data["country"] = dataset[0]["country"]["value"]
+        set = []
+        dataset.map do |datum|
+          set << [DateTime.parse("#{datum['date']}-01-01 00:00:00").to_i * 1000, datum["value"].to_f] if datum["value"]
+        end
+        country_data["data"] = set
+        data << country_data
+      end
+    end
+    infos_data["data"] = data
+    infos_data
   end
 end
