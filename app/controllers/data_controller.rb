@@ -14,7 +14,6 @@ class DataController < ApplicationController
   def display_data
     @description = dataset_description(params["title"]) unless params["title"].nil?
     @threatened = threatened(params["country"]) if params["pie"] == "1"
-    binding.pry
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path

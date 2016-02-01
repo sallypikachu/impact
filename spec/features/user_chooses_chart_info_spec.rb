@@ -45,10 +45,12 @@ feature "sees profile in top bar" do
 
   scenario "user chooses IUCN dataset" do
     visit data_path
-    select "Number of Organisms on the Red List", from: "title"
+    select "Energy use (kg of oil equivalent per capita)", from: "title"
+    check "Include data on number of endangered animals?"
     select "World", from: "country"
     click_on "Display data"
 
-    expect(page).to have_content("Pie chart depicts total numbers of all countries")
+    expect(page).to have_content("Endangered Organisms")
+    expect(page).to have_content("Extinct encompanies animals that are extinct and extinct in the wild.Threatened encompanies all that are critically endangered, endangered, and vulnerable.At Risk encompanies all taht are lower risk, conservation dependent, and near threatned.Data Deficient encompanies all that are data deficient.Least concerned all that are least concerned.")
   end
 end
