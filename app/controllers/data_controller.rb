@@ -12,10 +12,9 @@ class DataController < ApplicationController
   end
 
   def display_data
-    unless params["title"].nil?
-      @description = dataset_description(params["title"])
-      @threatened = threatened(params["country"]) if params["title"].include?("IUCN")
-    end
+    @description = dataset_description(params["title"]) unless params["title"].nil?
+    @threatened = threatened(params["country"]) if params["pie"] == "1"
+    binding.pry
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
