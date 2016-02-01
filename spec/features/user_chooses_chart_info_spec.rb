@@ -51,6 +51,6 @@ feature "sees profile in top bar" do
     click_on "Display data"
 
     expect(page).to have_content("Endangered Organisms")
-    expect(page).to have_content("Extinct encompanies animals that are extinct and extinct in the wild.Threatened encompanies all that are critically endangered, endangered, and vulnerable.At Risk encompanies all taht are lower risk, conservation dependent, and near threatned.Data Deficient encompanies all that are data deficient.Least concerned all that are least concerned.")
+    expect(page).to have_content("Extinct encompanies animals that are extinct")
   end
 end

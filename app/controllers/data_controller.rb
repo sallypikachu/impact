@@ -71,7 +71,7 @@ class DataController < ApplicationController
     indicator_array.each do |dataset|
     url = "http://api.worldbank.org/indicators/#{dataset}?format=json"
     info = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
-    description << {"title" => info[0]["name"], "description" => info[0]["sourceNote"]}
+    description << { "title" => info[0]["name"], "description" => info[0]["sourceNote"] }
     end
     description
   end

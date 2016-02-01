@@ -13,6 +13,6 @@ feature "visit home page to see tables/charts/maps" do
     visit root_path
 
     expect(page).to have_content("About")
-    expect(page).to have_content("Created to inspire curiousity about how we, humans, have impacted the world. Click through and select what sets of data you want to compare. Hopefully you will learn something new and it sets you on a path to learn more about society, behavior, and the environment.")
+    expect(page).to have_content("Created to inspire curiousity")
   end
 end
