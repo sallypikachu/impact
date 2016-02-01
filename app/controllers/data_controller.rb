@@ -12,12 +12,14 @@ class DataController < ApplicationController
   end
 
   def display_data
-    @description = dataset_description(params["title"]) unless params["title"].nil?
+    unless params["title"].nil?
+      @description = dataset_description(params["title"])
+      @threatened = threatened(params["country"]) if params["title"].include?("IUCN")
+    end
     if params["title"].nil?
       flash["notice"] = "You didn't choose any datasets/countries?!"
       redirect_to data_path
     elsif params["title"].count >= 1 && params["title"].count <= 3 && params["country"].count == 1
-      @threatened = threatened(params["country"])
       info = world_bank_info(params["country"], params["title"])
       @infos_data = []
       info.each do |dataset|
@@ -32,7 +34,6 @@ class DataController < ApplicationController
         @infos_data << set
       end
     elsif params["title"].count == 1 && params["country"].count > 1
-      @threatened = threatened(params["country"])
       info = world_bank_info(params["country"], params["title"])
       @no_info = []
       params["country"].each do |country|
@@ -72,7 +73,7 @@ class DataController < ApplicationController
     indicator_array.each do |dataset|
     url = "http://api.worldbank.org/indicators/#{dataset}?format=json"
     info = JSON.parse(Net::HTTP.get_response(URI(url)).body)[1]
-    description << {"title" => info[0]["name"], "description" =>info[0]["sourceNote"]}
+    description << {"title" => info[0]["name"], "description" => info[0]["sourceNote"]}
     end
     description
   end

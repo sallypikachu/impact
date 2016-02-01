@@ -36,7 +36,7 @@ Title.create([
   { value: "ER.BDV.TOTL.XQ", name: "GEF benefits index for biodiversity (0 = no biodiversity potential to 100 = maximum)" },
   { value: "ER.GDP.FWTL.M3.KD", name: "Water productivity, total (constant 2005 US$ GDP per cubic meter of total freshwater withdrawal)" },
   { value: "ER.MRN.PTMR.ZS", name: "Marine protected areas (% of territorial waters)" },
-  { value: "ER.PTD.TOTL.ZS", name: "Terrestrial and marine protected areas (% of total territorial area)" }
+  { value: "ER.PTD.TOTL.ZS", name: "Terrestrial and marine protected areas (% of total territorial area)" },
 ])
 
 (1960..2015).each do |year|

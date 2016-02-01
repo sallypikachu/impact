@@ -1,7 +1,8 @@
+<script>
 $(function () {
   $(document).ready(function () {
       // Build the chart
-    $('#world_pie').highcharts({
+    $('#pie').highcharts({
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -9,7 +10,7 @@ $(function () {
         type: 'pie'
       },
       title: {
-        text: 'Endangered Animals around the World'
+        text: 'Endangered Animals'
       },
       tooltip: {
         pointFormat: '{point.y} organisms'
@@ -26,26 +27,25 @@ $(function () {
       },
       series: [{
         name: 'Endangered',
-        colorByPoint: true,
+        type: 'pie',
         data: [{
           name: 'Extinct',
-          y: 1053
+          y: <%= @threatened[0] %>
         }, {
           name: 'Threatened',
-          y: 48379,
-          sliced: true,
-          selected: true
+          y: <%= @threatened[1] %>
         }, {
           name: 'At Risk',
-          y: 24143
+          y: <%= @threatened[2] %>
         }, {
           name: 'Data Deficient',
-          y: 32529
+          y: <%= @threatened[3] %>
         }, {
           name: 'Least Concerned',
-          y: 354185
+          y: <%= @threatened[4] %>
         }]
       }]
     });
   });
 });
+</script>
